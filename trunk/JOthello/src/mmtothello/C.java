@@ -1,0 +1,40 @@
+/*
+ * C.java
+ *
+ * Created on November 13, 2008, 12:18 PM
+ *  
+ * To change this template, choose Tools | Template Manager
+ * and open the template in the editor.
+ */ 
+ 
+package mmtothello;
+ 
+/**
+ * Constants go here.
+ *
+ * @author mocksuwannatat
+ */
+public class C {
+  
+  public static final int DEFAULT_DIMENSION = 8;
+  public static final char EMPTY = '-';
+  public static final char BLACK = 'B';
+  public static final char WHITE = 'W';
+  
+  public static final int[][] DIRECTIONS = { 
+    {-1, 0}, 
+    {-1, 1}, 
+    { 0, 1},
+    { 1, 1},
+    { 1, 0},
+    { 1,-1},
+    { 0,-1},
+    {-1,-1}
+  };
+      
+      
+  /** no instantiation */
+  private C() {
+  }
+  
+}
