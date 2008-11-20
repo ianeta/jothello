@@ -16,12 +16,6 @@ package mmtothello;
  */
 public class OBoard {
   
-  /** the board */
-  private char[][] b;
-  /** dimension */
-  private int dim;
-  private int numBlacks, numWhites;
-  
   public OBoard(int dimension) {
     dim = dimension;
     b = new char[dim][dim];
@@ -30,6 +24,15 @@ public class OBoard {
   
   public OBoard() {
     this(C.DEFAULT_DIMENSION);
+  }
+  
+  public int count(char who) {
+    switch (who) {
+      case C.WHITE: return numWhites;
+      case C.BLACK: return numBlacks;
+      case C.EMPTY: return dim*dim - (numWhites + numBlacks);
+    }
+    return 0;
   }
   
   private void updateCount(char who, int howMuch) {
@@ -60,11 +63,21 @@ public class OBoard {
     }
     return false;
   }
+
+  public int calculateImmediateFlips(int r, int c, char who) {
+    if (get(r,c) != C.EMPTY) return 0;
+    int ans = 0;
+    for (int dir = 0; dir < 8; dir++) {
+      String line = getLine(r, c, dir);
+      ans += howManyWillFlip(who, line);
+    }
+    return ans;
+  }
   
   /** Flip all required pieces once a new piece has been put at (row, col) 
    */
   public void flipAll(int row, int col) {
-    //TODO
+    clearJustFlipped();
     char who = get(row, col);
     for (int dir = 0; dir < 8; dir++) {
       String line = getLine(row, col, dir);
@@ -76,6 +89,7 @@ public class OBoard {
         ic += C.DIRECTIONS[dir][1];
         //System.out.printf("flipping %d, %d\n",ir, );
         set(ir, ic, who);
+        justFlipped[ir][ic] = true;
       }
     }
   }
@@ -135,17 +149,45 @@ public class OBoard {
   } 
   
   public void clear() {
+    // clear all
     for (int i=0; i<dim; i++) {
       for (int j=0; j<dim; j++) {
         b[i][j] = C.EMPTY; 
       }
     }
-    numBlacks = numWhites = 0;
+    clearJustFlipped();
     
+    // initial four pieces
     int mid = dim/2;
     b[mid][mid] = b[mid-1][mid-1] = C.BLACK;
     b[mid][mid-1] = b[mid-1][mid] = C.WHITE;
+
+    // initial count
+    numBlacks = numWhites = 2;
   }
   
+  public boolean justFlipped(int r, int c) {
+    return justFlipped[r][c];
+  }
+  
+  private void clearJustFlipped() {
+    if (justFlipped == null) {
+      justFlipped = new boolean[dim][dim];
+    }
+    for (int i = 0; i < dim; i++) {
+      for (int j = 0; j < dim; j++) {
+        justFlipped[i][j] = false;
+      }
+    }
+  }
+  
+  
+  /** the board */
+  private char[][] b;
+  /** dimension */
+  private int dim;
+  private int numBlacks, numWhites;
+  /** true if we just flipped it */
+  private boolean[][] justFlipped = null;
   
 }
