@@ -26,6 +26,10 @@ public class OBoard {
     this(C.DEFAULT_DIMENSION);
   }
   
+  public int size() {
+    return dim;
+  }
+  
   public int count(char who) {
     switch (who) {
       case C.WHITE: return numWhites;
@@ -64,6 +68,16 @@ public class OBoard {
     return false;
   }
 
+  public int countValidMoves(char who) {
+    int ans = 0;
+    for (int r = 0; r < dim; r++) {
+      for (int c = 0; c < dim; c++) {
+        if (canSet(r, c, who)) ans++;
+      }
+    }
+    return ans;
+  }
+  
   public int calculateImmediateFlips(int r, int c, char who) {
     if (get(r,c) != C.EMPTY) return 0;
     int ans = 0;
@@ -180,8 +194,7 @@ public class OBoard {
       }
     }
   }
-  
-  
+    
   /** the board */
   private char[][] b;
   /** dimension */

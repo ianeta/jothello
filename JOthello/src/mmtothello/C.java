@@ -31,6 +31,11 @@ public class C {
     { 0,-1},
     {-1,-1}
   };
+//  public static final Class[] THINKER_CLASSES = {
+//    RandomThinker.class,
+//    GreedyThinker.class,
+//    AnotherThinker.class
+//  };
       
       
   /** no instantiation */
