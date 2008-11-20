@@ -32,6 +32,7 @@ public class GreedyThinker implements Thinker {
         }
       }
     }
+    // pretend like we're thinking by delaying a bit
     try {
       Thread.sleep(3);
     } catch (InterruptedException e) {

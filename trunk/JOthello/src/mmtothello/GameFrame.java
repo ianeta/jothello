@@ -71,8 +71,6 @@ public class GameFrame extends javax.swing.JFrame {
 
     cmbWhiteThinker.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-    pnlBoard.setBackground(new java.awt.Color(255, 204, 153));
-
     org.jdesktop.layout.GroupLayout pnlBoardLayout = new org.jdesktop.layout.GroupLayout(pnlBoard);
     pnlBoard.setLayout(pnlBoardLayout);
     pnlBoardLayout.setHorizontalGroup(
@@ -106,7 +104,7 @@ public class GameFrame extends javax.swing.JFrame {
                     .add(jLabel2)
                     .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                     .add(lblNumWhite)))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 188, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 191, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                   .add(layout.createSequentialGroup()
                     .add(jLabel3)
