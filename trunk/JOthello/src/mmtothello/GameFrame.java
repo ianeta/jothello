@@ -39,8 +39,8 @@ public class GameFrame extends javax.swing.JFrame {
     jButton1 = new javax.swing.JButton();
     jLabel4 = new javax.swing.JLabel();
     jLabel5 = new javax.swing.JLabel();
-    jComboBox1 = new javax.swing.JComboBox();
-    jComboBox2 = new javax.swing.JComboBox();
+    cmbBlackThinker = new javax.swing.JComboBox();
+    cmbWhiteThinker = new javax.swing.JComboBox();
     pnlBoard = new javax.swing.JPanel();
     lblWhoseMove = new javax.swing.JLabel();
 
@@ -67,9 +67,9 @@ public class GameFrame extends javax.swing.JFrame {
 
     jLabel5.setText("WHITE's thinker:");
 
-    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    cmbBlackThinker.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-    jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    cmbWhiteThinker.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
     pnlBoard.setBackground(new java.awt.Color(255, 204, 153));
 
@@ -116,11 +116,11 @@ public class GameFrame extends javax.swing.JFrame {
               .add(layout.createSequentialGroup()
                 .add(jLabel4)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 133, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(cmbBlackThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 133, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
               .add(layout.createSequentialGroup()
                 .add(jLabel5)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jComboBox2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 133, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                .add(cmbWhiteThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 133, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
           .add(pnlBoard, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(layout.createSequentialGroup()
             .addContainerGap()
@@ -144,11 +144,11 @@ public class GameFrame extends javax.swing.JFrame {
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jLabel4)
-          .add(jComboBox1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+          .add(cmbBlackThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jLabel5)
-          .add(jComboBox2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+          .add(cmbWhiteThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         .add(6, 6, 6)
         .add(lblWhoseMove)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
@@ -175,9 +175,9 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
   }
   
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JComboBox cmbBlackThinker;
+  private javax.swing.JComboBox cmbWhiteThinker;
   private javax.swing.JButton jButton1;
-  private javax.swing.JComboBox jComboBox1;
-  private javax.swing.JComboBox jComboBox2;
   private javax.swing.JLabel jLabel1;
   private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel3;
@@ -192,9 +192,32 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
   private void initLogic() {
     size = C.DEFAULT_DIMENSION;
+    createThinkers();
     board = new OBoard(size);
     createPieces();
     redrawBoard();
+  }
+
+  private void createThinkers() {
+    int numThinkers = 3;
+    thinkers = new Thinker[numThinkers+1];
+    int k = 0;
+    thinkers[k++] = new GreedyThinker();
+    thinkers[k++] = new RandomThinker();
+    thinkers[k++] = new AnotherThinker();
+    thinkers[k++] = null;
+    cmbWhiteThinker.removeAllItems();
+    cmbBlackThinker.removeAllItems();
+    for (int i = 0; i < numThinkers; i++) {
+      String name = thinkers[i].getName();
+      cmbWhiteThinker.addItem(name);
+      cmbBlackThinker.addItem(name);
+    }
+    String name = "Human";
+    cmbWhiteThinker.addItem(name);
+    cmbBlackThinker.addItem(name);
+    cmbWhiteThinker.setSelectedIndex(numThinkers);
+    cmbBlackThinker.setSelectedIndex(numThinkers);
   }
   
   private void createPieces() {
@@ -238,22 +261,42 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     lblNumBlack.setText(""+ board.count(C.BLACK));
     lblNumWhite.setText(""+ board.count(C.WHITE));
-    lblWhoseMove.setText(String.format("It's %s's move...", 
-        whiteTurn ? "WHITE" : "BLACK"));
+    
+    String text = String.format("It's %s's turn...", 
+          whiteTurn ? "WHITE" : "BLACK");
+    if (!humanThinking) text += "     COMPUTER IS THINKING...";
+    if (gameOver) {
+      text = "GAME OVER";
+    };
+    lblWhoseMove.setText(text);
+//    repaint();
   }
   
   private void userClickedAtCell(int r, int c) {
+    if (gameOver) return;
+    if (!humanThinking) {
+      System.out.println("Grrr! Computer is thinking. Please wait.");
+      return;
+    }
+    
     char old = board.get(r, c);
     char p = getPlayer();
     if (!board.canSet(r, c, p)) {
       System.out.println("Grrr! can't put it there.");
       return;
     }
-    switchPlayer();
     board.set(r, c, p);
     board.flipAll(r, c);
+    switchPlayer();
+    checkGameOver();
+    playIfItsYourTurn();
     redrawBoard();
-    //buttons[r][c].setText(""+ p);
+  }
+  
+  private void checkGameOver() {
+    if (board.countValidMoves(getPlayer()) <= 0) {
+      gameOver = true;
+    }
   }
   
   private void switchPlayer() {
@@ -265,9 +308,50 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
   
   private void newGame() {
     // user clicked on New Game button
+    
+    // prepare thinkers (each could be null, which means human)
+    whiteThinker = thinkers[cmbWhiteThinker.getSelectedIndex()];
+    blackThinker = thinkers[cmbBlackThinker.getSelectedIndex()];
+    
+    // init board & turn
     board.clear();
     whiteTurn = true;
+    gameOver = false; 
+    playIfItsYourTurn();
     redrawBoard();
+  }
+
+  private Thinker currentThinker() {
+    return whiteTurn ? whiteThinker : blackThinker;
+  }
+  
+  private void playIfItsYourTurn() {
+    if (gameOver) return;
+    if (currentThinker() == null) {
+      humanThinking = true;
+      return;
+    }
+    
+    humanThinking = false; 
+    Thread thread = new Thread() {
+      final OBoard fboard = board;
+      
+      public void run() {
+        Thinker joe = currentThinker();
+        char p = getPlayer();
+        // this can delay
+        RowCol move = joe.nextMove(p, board);
+        int r = move.row;
+        int c = move.col;
+        fboard.set(r, c, p);
+        fboard.flipAll(r, c);
+        switchPlayer();
+        checkGameOver();
+        playIfItsYourTurn();
+        redrawBoard();
+      }
+    };
+    thread.start();
   }
   
   
@@ -275,5 +359,8 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
   private OBoard board = null;
   private Cell[][] cells;
   private boolean whiteTurn = true;
-  
+  private Thinker[] thinkers;
+  private boolean humanThinking = true;
+  private Thinker whiteThinker, blackThinker;
+  private boolean gameOver = false; 
 }
