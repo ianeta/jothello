@@ -31,7 +31,6 @@ public class SimpleAlphaBetaThinker implements Thinker
 	private double maxValue(char color, OBoard board, int depth, double a, double b)
 	{
 		Queue<MoveInfo> validMoves = board.getValidMoves(color);
-		double v = Double.NEGATIVE_INFINITY;
 		if (depth >= maxDepth)
 		{
 			//game isn't over, create a heuristic for current layout
@@ -43,6 +42,7 @@ public class SimpleAlphaBetaThinker implements Thinker
 			return endgameScore(board, color, depth);
 		}
 
+		double v = Double.NEGATIVE_INFINITY;
 		for (MoveInfo move : validMoves)
 		{
 			double tempV = max(v, minValue(color, new OBoard(board, move), depth + 1, a, b));
@@ -67,7 +67,6 @@ public class SimpleAlphaBetaThinker implements Thinker
 	private double minValue(char color, OBoard board, int depth, double a, double b)
 	{
 		Queue<MoveInfo> validMoves = board.getValidMoves(board.opponentOf(color));
-		double v = Double.POSITIVE_INFINITY;
 		if (depth >= maxDepth)
 		{
 			//game isn't over, create a heuristic for current layout
@@ -79,6 +78,7 @@ public class SimpleAlphaBetaThinker implements Thinker
 			return endgameScore(board, color, depth);
 		}
 
+		double v = Double.POSITIVE_INFINITY;
 		for (MoveInfo move : validMoves)
 		{
 			v = min(v, maxValue(color, new OBoard(board, move), depth + 1, a, b));
@@ -112,15 +112,16 @@ public class SimpleAlphaBetaThinker implements Thinker
 	private double endgameScore(OBoard board, char color, int depth)
 	{
 		int totalScore = board.countNow(color) - board.countNow(board.opponentOf(color));
-		if (totalScore > 0)
-		{
-			return 1000.0 / depth;
-		}
-		else if (totalScore < 0)
-		{
-			return -1000.0 / depth;
-		}
-		return 0.0;
+//		if (totalScore > 0)
+//		{
+//			return 1000.0 / depth;
+//		}
+//		else if (totalScore < 0)
+//		{
+//			return -1000.0 / depth;
+//		}
+//		return 0.0;
+		return (totalScore * 100.0) / depth;
 	}
 
 	private double currentgameScore(OBoard board, char color)
