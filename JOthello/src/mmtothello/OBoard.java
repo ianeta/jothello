@@ -342,21 +342,39 @@ public class OBoard
 
 	//todo: optimize this by using a precomputed value:
 	//todo: like the method "count", except that doesn't work right now!
-	public int countNow(char color)
+	public void countNow()
 	{
-		int count = 0;
+		countBlack = 0;
+		countWhite = 0;
 		for (int y = 0; y < dim; y++)
 		{
 			for (int x = 0; x < dim; x++)
 			{
-				if (b[y][x] == color)
+				if (b[y][x] == C.BLACK)
 				{
-					count++;
+					countBlack++;
+				}
+				else if(b[y][x] == C.WHITE)
+				{
+					countWhite++;
 				}
 			}
 		}
-		return count;
 	}
+
+	public int getCount(char color)
+	{
+		if(color == C.BLACK)
+		{
+			return countBlack;
+		}
+		return countWhite;
+	}
+
+	private int countBlack = 0;
+	private int countWhite = 0;
+
+
 	/** the board */
 	private char[][] b;
 	/** dimension */
