@@ -12,7 +12,7 @@ import java.util.Queue;
  */
 public class SimpleAlphaBetaThinker implements Thinker
 {
-	private static final int maxDepth = 5;
+	private static final int maxDepth = 6;
 	private static final String name = "Simple Alpha-Beta";
 	private RowCol bestMove;
 
@@ -43,8 +43,9 @@ public class SimpleAlphaBetaThinker implements Thinker
 		}
 
 		double v = Double.NEGATIVE_INFINITY;
-		for (MoveInfo move : validMoves)
+		while(!validMoves.isEmpty())
 		{
+			MoveInfo move = validMoves.remove();
 			double tempV = max(v, minValue(color, new OBoard(board, move), depth + 1, a, b));
 			if(depth == 0)
 			{
@@ -79,8 +80,9 @@ public class SimpleAlphaBetaThinker implements Thinker
 		}
 
 		double v = Double.POSITIVE_INFINITY;
-		for (MoveInfo move : validMoves)
+		while(!validMoves.isEmpty())
 		{
+			MoveInfo move = validMoves.remove();
 			v = min(v, maxValue(color, new OBoard(board, move), depth + 1, a, b));
 			if(v <= a)
 			{
