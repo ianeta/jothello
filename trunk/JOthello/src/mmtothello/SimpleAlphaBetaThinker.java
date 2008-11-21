@@ -15,11 +15,11 @@ public class SimpleAlphaBetaThinker implements Thinker
 	private static final int maxDepth = 6;
 	private static final String name = "Simple Alpha-Beta";
 	private RowCol bestMove;
-
 	public RowCol nextMove(char color, OBoard board)
 	{
 		bestMove = new RowCol(-1, -1);
-		System.out.println(maxValue(color, board, 0, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY));
+		double v = maxValue(color, board, 0, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
+//		System.out.println(v);
 		return bestMove;
 	}
 
@@ -113,21 +113,14 @@ public class SimpleAlphaBetaThinker implements Thinker
 
 	private double endgameScore(OBoard board, char color, int depth)
 	{
-		int totalScore = board.countNow(color) - board.countNow(board.opponentOf(color));
-//		if (totalScore > 0)
-//		{
-//			return 1000.0 / depth;
-//		}
-//		else if (totalScore < 0)
-//		{
-//			return -1000.0 / depth;
-//		}
-//		return 0.0;
+		board.countNow();
+		int totalScore = board.getCount(color) - board.getCount(board.opponentOf(color));
 		return (totalScore * 100.0) / depth;
 	}
 
 	private double currentgameScore(OBoard board, char color)
 	{
-		return board.countNow(color) - board.countNow(board.opponentOf(color));
+		board.countNow();
+		return board.getCount(color) - board.getCount(board.opponentOf(color));
 	}
 }
