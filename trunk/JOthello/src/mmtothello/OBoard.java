@@ -191,7 +191,8 @@ public class OBoard
 
 		public int compare(MoveInfo o1, MoveInfo o2)
 		{
-			double score = o1.getScore() - o2.getScore();
+			//get reverse ordering
+			double score = o2.getScore() - o1.getScore();
 			if (score > 0)
 			{
 				return 1;
