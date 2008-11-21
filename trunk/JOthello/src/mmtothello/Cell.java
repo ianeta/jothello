@@ -17,9 +17,9 @@ public class Cell extends JButton {
   private static final Color BOARD_COLOR = 
       new Color(0f, .5f, 0f);
   private static final Color VALID_MOVE_COLOR = 
-      new Color(.25f, .5f, 0f);
-  private static final Color TEXT_COLOR = 
       new Color(.25f, .5f, .5f);
+  private static final Color TEXT_COLOR = Color.BLACK;
+//      new Color(.25f, .5f, .5f);
 
   public Cell(String label) {
     super(label);

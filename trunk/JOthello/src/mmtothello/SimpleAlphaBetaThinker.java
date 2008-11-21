@@ -45,7 +45,7 @@ public class SimpleAlphaBetaThinker implements Thinker
 
 		for (MoveInfo move : validMoves)
 		{
-			double tempV =  max(v, minValue(color, new OBoard(board, move), depth + 1, a, b));
+			double tempV = max(v, minValue(color, new OBoard(board, move), depth + 1, a, b));
 			if(depth == 0)
 			{
 				if(tempV > v)
