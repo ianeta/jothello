@@ -197,12 +197,13 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
   }
 
   private void createThinkers() {
-    int numThinkers = 3;
+    int numThinkers = 4;
     thinkers = new Thinker[numThinkers+1];
     int k = 0;
     thinkers[k++] = new GreedyThinker();
     thinkers[k++] = new RandomThinker();
     thinkers[k++] = new AnotherThinker();
+	thinkers[k++] = new SimpleAlphaBetaThinker();
     thinkers[k++] = null;
     cmbWhiteThinker.removeAllItems();
     cmbBlackThinker.removeAllItems();

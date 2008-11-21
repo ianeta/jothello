@@ -6,14 +6,21 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
-
-package mmtothello; 
+package mmtothello;
 
 /**
  *
  * @author mocksuwannatat
  */
 public class RowCol {
-  int row;
-  int col;
+
+    public RowCol() {
+    }
+
+    public RowCol(int row, int col) {
+        this.row = row;
+        this.col = col;
+    }
+    int row;
+    int col;
 }
