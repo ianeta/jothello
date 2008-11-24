@@ -401,7 +401,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 	private int size;
 	private OBoard board = null;
 	private Cell[][] cells;
-	private boolean whiteTurn = true;
+	private boolean whiteTurn = false;
 	private Thinker[] thinkers;
 	private boolean humanThinking = true;
 	private Thinker whiteThinker,  blackThinker;
