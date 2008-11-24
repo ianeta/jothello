@@ -19,7 +19,6 @@ import java.util.Queue;
  */
 public class OBoard
 {
-
 	public OBoard(int dimension)
 	{
 		dim = dimension;
@@ -313,8 +312,8 @@ public class OBoard
 
 		// initial four pieces
 		int mid = dim / 2;
-		b[mid][mid] = b[mid - 1][mid - 1] = C.BLACK;
-		b[mid][mid - 1] = b[mid - 1][mid] = C.WHITE;
+		b[mid][mid] = b[mid - 1][mid - 1] = C.WHITE;
+		b[mid][mid - 1] = b[mid - 1][mid] = C.BLACK;
 
 		// initial count
 		numBlacks = numWhites = 2;
