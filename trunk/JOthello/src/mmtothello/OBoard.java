@@ -152,6 +152,21 @@ public class OBoard
 		return ans;
 	}
 
+	public boolean canPlayerMove(char who)
+	{
+		for (int r = 0; r < dim; r++)
+		{
+			for (int c = 0; c < dim; c++)
+			{
+				if (canSet(r, c, who))
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public int calculateImmediateFlips(int r, int c, char who)
 	{
 		if (get(r, c) != C.EMPTY)
@@ -187,7 +202,6 @@ public class OBoard
 
 	private static class MoveInfoComparator implements Comparator<MoveInfo>
 	{
-
 		public int compare(MoveInfo o1, MoveInfo o2)
 		{
 			//get reverse ordering
@@ -341,10 +355,10 @@ public class OBoard
 
 	//todo: optimize this by using a precomputed value:
 	//todo: like the method "count", except that doesn't work right now!
-	public void countNow()
+	public Score calculateScore(boolean gameOver)
 	{
-		countBlack = 0;
-		countWhite = 0;
+		int countBlack = 0;
+		int countWhite = 0;
 		for (int y = 0; y < dim; y++)
 		{
 			for (int x = 0; x < dim; x++)
@@ -359,20 +373,8 @@ public class OBoard
 				}
 			}
 		}
+		return new Score(countBlack, countWhite, gameOver);
 	}
-
-	public int getCount(char color)
-	{
-		if(color == C.BLACK)
-		{
-			return countBlack;
-		}
-		return countWhite;
-	}
-
-	private int countBlack = 0;
-	private int countWhite = 0;
-
 
 	/** the board */
 	private char[][] b;
