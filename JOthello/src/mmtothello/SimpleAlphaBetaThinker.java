@@ -113,14 +113,14 @@ public class SimpleAlphaBetaThinker implements Thinker
 
 	private double endgameScore(OBoard board, char color, int depth)
 	{
-		board.countNow();
-		int totalScore = board.getCount(color) - board.getCount(board.opponentOf(color));
+		Score score = board.calculateScore(true);
+		int totalScore = score.getScore(color) - score.getScore(board.opponentOf(color));
 		return (totalScore * 100.0) / depth;
 	}
 
 	private double currentgameScore(OBoard board, char color)
 	{
-		board.countNow();
-		return board.getCount(color) - board.getCount(board.opponentOf(color));
+		Score score = board.calculateScore(false);
+		return score.getScore(color) - score.getScore(board.opponentOf(color));
 	}
 }
