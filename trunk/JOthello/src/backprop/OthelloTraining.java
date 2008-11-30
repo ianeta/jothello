@@ -12,7 +12,7 @@ import mmtothello.OBoard;
 public class OthelloTraining {
 
 	public static final int MOVEPARTITIONSIZE = 1;
-	public static final int[] SCORERANGES = {-5, 0, 1, 6};
+	public static final int[] SCORERANGES = { -5, 0, 1, 6 };
 	public static final double LEARNINGRATE = 0.05;
 
 	public static final ScoreRange RANGE = new ScoreRange(SCORERANGES);
@@ -20,8 +20,7 @@ public class OthelloTraining {
 	public transient List<TrainingEx>[][] partitions = new List[C.TOTAL_MOVES
 			/ MOVEPARTITIONSIZE][SCORERANGES.length + 1];
 
-	public Backprop[][] anns = new Backprop[C.TOTAL_MOVES
-			/ MOVEPARTITIONSIZE][SCORERANGES.length + 1];
+	public Backprop[][] anns = new Backprop[C.TOTAL_MOVES / MOVEPARTITIONSIZE][SCORERANGES.length + 1];
 
 	public OthelloTraining() {
 		for (int i = 0; i < partitions.length; i++) {
@@ -31,6 +30,24 @@ public class OthelloTraining {
 		}
 	}
 
+	public void addGame(OBoard[] game, Player winner) throws Exception {
+		OBoard oBoard = null;
+		for (int i = 0; i < game.length; i++) {
+			oBoard = game[i];
+			int blackScore = oBoard.calculateScore(isGameOver(oBoard))
+					.getBlackScore();
+
+			int move = this.getMovePartition(oBoard.getMoveNumber() - 1);
+			
+			int scoreRangeNum = RANGE.getPlace(blackScore);
+			
+			for(int j = i; j < game.length; j++) {
+				partitions[move][scoreRangeNum].add(BoardState.toTranningEx(game[j], winner));
+			}
+		}
+	}
+
+	/*
 	public void addState(OBoard oBoard, Player winner) throws Exception {
 		TrainingEx te = BoardState.toTranningEx(oBoard, winner);
 
@@ -38,8 +55,8 @@ public class OthelloTraining {
 		int blackScore = oBoard.calculateScore(isGameOver(oBoard))
 				.getBlackScore();
 
-//		int move = this.getMovePartition(BoardState.getMoveNumber(te));
-		int move = oBoard.getMoveNumber() - 1;
+		// int move = this.getMovePartition(BoardState.getMoveNumber(te));
+		//int move = oBoard.getMoveNumber() - 1;
 
 		int scoreRangeNum = RANGE.getPlace(blackScore);
 
@@ -48,6 +65,7 @@ public class OthelloTraining {
 		}
 
 	}
+	*/
 
 	public Backprop[][] runTraining(String filename) {
 		// do the training
@@ -65,7 +83,8 @@ public class OthelloTraining {
 
 				// save the file to disk
 				try {
-					fos = new FileOutputStream(filename + "." + i + "." + j + ".saved");
+					fos = new FileOutputStream(filename + "." + i + "." + j
+							+ ".saved");
 					out = new ObjectOutputStream(fos);
 					out.writeObject(anns[i][j]);
 					out.close();
