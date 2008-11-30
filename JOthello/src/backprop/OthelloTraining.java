@@ -12,15 +12,15 @@ import mmtothello.OBoard;
 public class OthelloTraining {
 
 	public static final int MOVEPARTITIONSIZE = 1;
-	public static final int[] SCORERANGES = { -5, 0, 5 };
+	public static final int[] SCORERANGES = {-5, 0, 1, 6};
 	public static final double LEARNINGRATE = 0.05;
 
 	public static final ScoreRange RANGE = new ScoreRange(SCORERANGES);
 
-	public transient List<TrainingEx>[][] partitions = new List[(C.DEFAULT_DIMENSION * C.DEFAULT_DIMENSION)
+	public transient List<TrainingEx>[][] partitions = new List[C.TOTAL_MOVES
 			/ MOVEPARTITIONSIZE][SCORERANGES.length + 1];
 
-	public Backprop[][] anns = new Backprop[(C.DEFAULT_DIMENSION * C.DEFAULT_DIMENSION)
+	public Backprop[][] anns = new Backprop[C.TOTAL_MOVES
 			/ MOVEPARTITIONSIZE][SCORERANGES.length + 1];
 
 	public OthelloTraining() {
@@ -38,7 +38,8 @@ public class OthelloTraining {
 		int blackScore = oBoard.calculateScore(isGameOver(oBoard))
 				.getBlackScore();
 
-		int move = this.getMovePartition(BoardState.getMoveNumber(te));
+//		int move = this.getMovePartition(BoardState.getMoveNumber(te));
+		int move = oBoard.getMoveNumber() - 1;
 
 		int scoreRangeNum = RANGE.getPlace(blackScore);
 
