@@ -114,6 +114,16 @@ public class OBoard
 		b[r][c] = who;
 	}
 
+	public void incMoveNumber()
+	{
+		moveNumber++;
+	}
+
+	public int getMoveNumber()
+	{
+		return moveNumber;
+	}
+
 	public boolean canSet(int r, int c, char who)
 	{
 		if (get(r, c) != C.EMPTY)
@@ -375,6 +385,8 @@ public class OBoard
 		}
 		return new Score(countBlack, countWhite, gameOver);
 	}
+
+	private int moveNumber = 0;
 
 	/** the board */
 	private char[][] b;
