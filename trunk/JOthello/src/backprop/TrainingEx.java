@@ -1,6 +1,13 @@
 package backprop;
 
-public class TrainingEx {
+import java.io.Serializable;
+
+public class TrainingEx implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1389142288891698680L;
 	int[] input;
 	int inputSize;
 	double output;

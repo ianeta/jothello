@@ -1,8 +1,13 @@
 package backprop;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Backprop {
+public class Backprop implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1798604603698096051L;
 	SigUnit[] hidden;
 	SigUnit[] out;
 	int numHidden, numInput;
