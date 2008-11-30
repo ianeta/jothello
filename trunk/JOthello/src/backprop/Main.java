@@ -47,7 +47,7 @@ public class Main {
 		}
 		
 
-		bp.update_weights(te);
+		bp.update_weights(te, vs);
 
 		for (int i = 0; i < verificationSetSize; i++) {
 			double[] a = bp.calculateOutput(vs[i]);
