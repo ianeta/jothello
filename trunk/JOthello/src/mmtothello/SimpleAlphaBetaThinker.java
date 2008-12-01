@@ -20,6 +20,7 @@ public class SimpleAlphaBetaThinker implements Thinker
 		bestMove = new RowCol(-1, -1);
 		double v = maxValue(color, board, 0, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
 //		System.out.println(v);
+		AlphaBetaHelper.printMove(bestMove, color);
 		return bestMove;
 	}
 
@@ -40,6 +41,11 @@ public class SimpleAlphaBetaThinker implements Thinker
 		{
 			//game is over, check who wins
 			return endgameScore(board, color, depth);
+		}
+
+		if(depth == 0)
+		{
+			AlphaBetaHelper.printValidMoves(validMoves, color);
 		}
 
 		double v = Double.NEGATIVE_INFINITY;

@@ -25,7 +25,10 @@ public class GenericParser
 		fillFilenameList();
 		for (String filename : filenames)
 		{
-			parseFile(path + filename);
+			if (filename.endsWith("txt"))
+			{
+				parseFile(path + filename);
+			}
 		}
 	}
 
