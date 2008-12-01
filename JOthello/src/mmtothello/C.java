@@ -20,7 +20,7 @@ public class C {
   public static final char EMPTY = '-';
   public static final char BLACK = 'B';
   public static final char WHITE = 'W';
-  public static final int TOTAL_MOVES = DEFAULT_DIMENSION * DEFAULT_DIMENSION - 4;
+  public static final int TOTAL_MOVES = DEFAULT_DIMENSION * DEFAULT_DIMENSION - 3;
 
   
   public static final int[][] DIRECTIONS = { 
