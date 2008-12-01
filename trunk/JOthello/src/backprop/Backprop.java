@@ -13,7 +13,7 @@ public class Backprop implements Serializable {
 	int numHidden, numInput;
 	double ln;
 	final int numOutput = 1;
-	final double threshold = 0.25;
+	final double threshold = 0.05;
 
 	/** Creates a new instance of Backprop */
 	public Backprop(int in, int h, double n) {
@@ -134,7 +134,6 @@ public class Backprop implements Serializable {
 		avgError = 10;
 		while (avgError > threshold) {
 			for (int i = 0; i < teSize; i++) {
-
 				// Calculate the output of each hidden unit
 				for (int j = 0; j < numHidden; j++) {
 					net = 0;
@@ -229,7 +228,6 @@ public class Backprop implements Serializable {
 		avgError = 10;
 		while (avgError > threshold) {
 			for (int i = 0; i < teSize; i++) {
-
 				// Calculate the output of each hidden unit
 				for (int j = 0; j < numHidden; j++) {
 					net = 0;
@@ -292,7 +290,7 @@ public class Backprop implements Serializable {
 
 			// Calculate the error
 			avgError = calcError(vs);
-			// System.out.println(avgError);
+			 System.out.println(avgError);
 		}
 
 	}

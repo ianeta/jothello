@@ -4,8 +4,11 @@
  */
 package ggsparse;
 
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import mmtothello.C;
@@ -24,13 +27,14 @@ public class GGSParser
 	private int gameCount = 0;
 	private StringBuffer movesBuffer;
 	private char[] tempBuffer = new char[2];
-	private List<String> movesList;
+//	private List<String> movesList;
 	private String path = "./ggf/";
 	private String[] filenames;
+	private List<String> parsedGames;
 
 	public GGSParser()
 	{
-		movesList = new ArrayList<String>();
+//		movesList = new ArrayList<String>();
 		fillFilenameList();
 		for(String filename : filenames)
 		{
@@ -44,12 +48,21 @@ public class GGSParser
 	{
 		try
 		{
+			parsedGames = new ArrayList<String>();
 			FileInputStream fileStream = new FileInputStream(new File(filename));
 			int b;
 			while ((b = fileStream.read()) > -1)
 			{
 				parseByte(b);
 			}
+			fileStream.close();
+
+			PrintWriter outStream = new PrintWriter(new FileOutputStream(new File(filename + ".txt"), true));
+			for(String s : parsedGames)
+			{
+				outStream.println(s);
+			}
+			outStream.close();
 		}
 		catch (Exception e)
 		{
@@ -100,19 +113,19 @@ public class GGSParser
 		b1 = b;
 	}
 
-	private void verifyMovesBuffer()
-	{
-		if ((movesBuffer.length() / 2) <= 60 && movesBuffer.length() >= 40)
-		{
-			String moves = movesBuffer.toString().toLowerCase();
-			String firstMove = moves.substring(0, 2);
-			if (firstMove.equals("c4") || firstMove.equals("d3") || firstMove.equals("f5") || firstMove.equals("e6"))
-			{
-				movesList.add(moves);
-				System.out.println(moves);
-			}
-		}
-	}
+//	private void verifyMovesBuffer()
+//	{
+//		if ((movesBuffer.length() / 2) <= 60 && movesBuffer.length() >= 40)
+//		{
+//			String moves = movesBuffer.toString().toLowerCase();
+//			String firstMove = moves.substring(0, 2);
+//			if (firstMove.equals("c4") || firstMove.equals("d3") || firstMove.equals("f5") || firstMove.equals("e6"))
+//			{
+//				movesList.add(moves);
+//				System.out.println(moves);
+//			}
+//		}
+//	}
 
 	private void makeMoves()
 	{
@@ -131,6 +144,7 @@ public class GGSParser
 				}
 				if (board.canSet(row, col, color))
 				{
+					board.incMoveNumber();
 					board.set(row, col, color);
 					board.flipAll(row, col);
 					color = board.opponentOf(color);
@@ -144,8 +158,12 @@ public class GGSParser
 			Score score = board.calculateScore(true);
 			if (isGameOver(board))
 			{
-				score.printScore();
+//				score.printScore();
+//				System.out.println(board.getMoveNumber());
+				String s = score.whoIsWinner() + " " + allMoves;
+				parsedGames.add(s);
 			}
+
 		}
 	}
 
