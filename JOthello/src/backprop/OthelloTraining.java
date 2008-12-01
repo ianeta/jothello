@@ -94,6 +94,7 @@ public class OthelloTraining {
 				}
 
 				// save the file to disk
+				/*
 				try {
 					fos = new FileOutputStream(filename + "." + i + "." + j
 							+ ".saved");
@@ -104,6 +105,7 @@ public class OthelloTraining {
 					System.out.println("Error saving to disk");
 					ex.printStackTrace();
 				}
+				*/
 
 			}
 
