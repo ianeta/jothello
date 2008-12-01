@@ -37,35 +37,33 @@ public class OthelloTraining {
 			int blackScore = oBoard.calculateScore(isGameOver(oBoard))
 					.getBlackScore();
 
-			int move = this.getMovePartition(oBoard.getMoveNumber() - 1);
-			
+			int move = this.getMovePartition(i);
+
 			int scoreRangeNum = RANGE.getPlace(blackScore);
-			
-			for(int j = i; j < game.length; j++) {
-				partitions[move][scoreRangeNum].add(BoardState.toTranningEx(game[j], winner));
+
+			for (int j = i; j < game.length; j++) {
+				partitions[move][scoreRangeNum].add(BoardState.toTranningEx(
+						game[j], winner));
 			}
 		}
 	}
 
 	/*
-	public void addState(OBoard oBoard, Player winner) throws Exception {
-		TrainingEx te = BoardState.toTranningEx(oBoard, winner);
-
-		// is the calculate score part done correctly here?
-		int blackScore = oBoard.calculateScore(isGameOver(oBoard))
-				.getBlackScore();
-
-		// int move = this.getMovePartition(BoardState.getMoveNumber(te));
-		//int move = oBoard.getMoveNumber() - 1;
-
-		int scoreRangeNum = RANGE.getPlace(blackScore);
-
-		for (int i = 0; i < move; i++) {
-			partitions[i][scoreRangeNum].add(te);
-		}
-
-	}
-	*/
+	 * public void addState(OBoard oBoard, Player winner) throws Exception {
+	 * TrainingEx te = BoardState.toTranningEx(oBoard, winner);
+	 * 
+	 * // is the calculate score part done correctly here? int blackScore =
+	 * oBoard.calculateScore(isGameOver(oBoard)) .getBlackScore();
+	 * 
+	 * // int move = this.getMovePartition(BoardState.getMoveNumber(te)); //int
+	 * move = oBoard.getMoveNumber() - 1;
+	 * 
+	 * int scoreRangeNum = RANGE.getPlace(blackScore);
+	 * 
+	 * for (int i = 0; i < move; i++) { partitions[i][scoreRangeNum].add(te); }
+	 * 
+	 * }
+	 */
 
 	public Backprop[][] runTraining(String filename) {
 		// do the training
@@ -78,8 +76,14 @@ public class OthelloTraining {
 						(C.DEFAULT_DIMENSION * C.DEFAULT_DIMENSION) / 2,
 						LEARNINGRATE);
 				anns[i][j].init_weights();
-				anns[i][j].update_weights((TrainingEx[]) partitions[i][j]
-						.toArray());
+				try {
+					anns[i][j].update_weights((TrainingEx[]) partitions[i][j]
+							.toArray());
+				} catch (Exception e) {
+					System.out.println(e.getMessage()
+							+ " for the following ann: " + filename + "." + i
+							+ "." + j + ".saved");
+				}
 
 				// save the file to disk
 				try {
