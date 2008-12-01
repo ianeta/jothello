@@ -123,7 +123,7 @@ public class Backprop implements Serializable {
 		double[][] hDw = new double[numHidden][numInput + 1];
 		double[][] oDw = new double[numOutput][numHidden + 1];
 		
-		if(te.length < 0) {
+		if(te.length <= 0) {
 			throw new Exception("Tried to create an ANN with using no weights");
 		}
 
@@ -224,7 +224,7 @@ public class Backprop implements Serializable {
 		double[][] hDw = new double[numHidden][numInput + 1];
 		double[][] oDw = new double[numOutput][numHidden + 1];
 		
-		if(te.length < 0) {
+		if(te.length <= 0) {
 			throw new Exception("Tried to create an ANN with using no weights");
 		}
 

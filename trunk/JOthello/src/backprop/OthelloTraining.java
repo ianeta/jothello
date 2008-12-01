@@ -45,10 +45,12 @@ public class OthelloTraining {
 
 			int blackScore = oBoard.calculateScore(isGameOver(oBoard))
 					.getBlackScore();
+			int whiteScore = oBoard.calculateScore(isGameOver(oBoard))
+					.getWhiteScore();
 
 			int move = this.getMovePartition(i);
 
-			int scoreRangeNum = RANGE.getPlace(blackScore);
+			int scoreRangeNum = RANGE.getPlace(blackScore - whiteScore);
 
 			for (int j = i; j < game.size(); j++) {
 				partitions[move][scoreRangeNum].add(gameTrain.get(j));
@@ -83,6 +85,8 @@ public class OthelloTraining {
 			for (int j = 0; j < partitions[i].length; j++) {
 
 				if (i != 0 && partitions[i][j].size() < C.MIN_GAMES_THRESHOLD) {
+					System.out.println("Using the default nw for: " + filename
+							+ "." + i + "." + j + ".saved");
 					anns[i][j] = defaultAnn;
 
 				} else {
@@ -99,7 +103,7 @@ public class OthelloTraining {
 						System.out.println(e.getMessage()
 								+ " for the following ann: " + filename + "."
 								+ i + "." + j + ".saved");
-						// e.printStackTrace();
+						e.printStackTrace();
 					}
 					if (i == 0 && j == CENTERSCORERANGE) {
 						defaultAnn = anns[i][j];
