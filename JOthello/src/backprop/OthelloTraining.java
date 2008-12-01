@@ -84,8 +84,8 @@ public class OthelloTraining {
 						LEARNINGRATE);
 				anns[i][j].init_weights();
 				try {
-					anns[i][j].update_weights((TrainingEx[]) partitions[i][j]
-							.toArray());
+					anns[i][j].update_weights(partitions[i][j]
+							.toArray(new TrainingEx[1]));
 				} catch (Exception e) {
 					System.out.println(e.getMessage()
 							+ " for the following ann: " + filename + "." + i
