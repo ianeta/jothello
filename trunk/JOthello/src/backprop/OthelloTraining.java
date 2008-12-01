@@ -15,7 +15,7 @@ public class OthelloTraining {
 	public static final int[] SCORERANGES = { -5, 0, 1, 6 };
 	// if you change score ranges need to change this too
 	public static final int CENTERSCORERANGE = 2;
-	public static final double LEARNINGRATE = 0.5;
+	public static final double LEARNINGRATE = 0.01;
 
 	public static final ScoreRange RANGE = new ScoreRange(SCORERANGES);
 
