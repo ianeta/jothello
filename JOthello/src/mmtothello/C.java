@@ -22,6 +22,7 @@ public class C {
   public static final char WHITE = 'W';
   public static final int TOTAL_MOVES = DEFAULT_DIMENSION * DEFAULT_DIMENSION - 3;
   public static final int MIN_GAMES_THRESHOLD = 5;
+  public static final String DEFAULT_BACKPROP_FILENAME = "outputTest.0.2.saved";
 
   
   public static final int[][] DIRECTIONS = { 
