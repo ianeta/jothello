@@ -5,9 +5,14 @@
  */
 package mmtothello;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
+import backprop.Backprop;
 
 /**
  *
@@ -204,13 +209,14 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 	private void createThinkers()
 	{
-		int numThinkers = 4;
+		int numThinkers = 5;
 		thinkers = new Thinker[numThinkers + 1];
 		int k = 0;
 		thinkers[k++] = new GreedyThinker();
 		thinkers[k++] = new RandomThinker();
 		thinkers[k++] = new AnotherThinker();
 		thinkers[k++] = new SimpleAlphaBetaThinker();
+		thinkers[k++] = new NeuralThinker(this.getBasicBackProp());
 		thinkers[k++] = null;
 		cmbWhiteThinker.removeAllItems();
 		cmbBlackThinker.removeAllItems();
@@ -225,6 +231,23 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 		cmbBlackThinker.addItem(name);
 		cmbWhiteThinker.setSelectedIndex(numThinkers);
 		cmbBlackThinker.setSelectedIndex(numThinkers);
+	}
+	
+	private Backprop getBasicBackProp() {
+		Backprop def = null;
+		FileInputStream fis = null;
+		ObjectInputStream in = null;
+		try {
+			fis = new FileInputStream(C.DEFAULT_BACKPROP_FILENAME);
+			in = new ObjectInputStream(fis);
+			def = (Backprop) in.readObject();
+			in.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} catch (ClassNotFoundException ex) {
+			ex.printStackTrace();
+		}
+		return def;
 	}
 
 	private void createPieces()
