@@ -8,16 +8,16 @@ public class TrainingEx implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1389142288891698680L;
-	int[] input;
+	double[] input;
 	int inputSize;
 	double output;
 
 	/** Creates a new instance of TrainingEx */
-	public TrainingEx(int[] in, double o) {
+	public TrainingEx(double[] in, double o) {
 		inputSize = in.length + 1;
 		output = o;
 
-		input = new int[inputSize];
+		input = new double[inputSize];
 		input[0] = 1;
 		for (int i = 1; i < inputSize; i++)
 			input[i] = in[i - 1];
@@ -27,7 +27,7 @@ public class TrainingEx implements Serializable{
 		return output;
 	}
 
-	public int[] getInput() {
+	public double[] getInput() {
 		return input;
 	}
 

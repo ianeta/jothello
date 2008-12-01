@@ -52,7 +52,7 @@ public class GenericParser
 					if (game != null)
 					{
 						//place it in the machine learning bad boy
-						othelloTraining.addGame(game.getMoves(), game.getWinner());
+						othelloTraining.addGameNew(game.getMoves(), game.getWinner());
 						gameCount++;
 					}
 					line = reader.readLine();

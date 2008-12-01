@@ -15,7 +15,7 @@ public class Main {
 		TrainingEx[] vs = new TrainingEx[verificationSetSize];
 
 		for (int i = 0; i < verificationSetSize; i++) {
-			int[] in2 = new int[inputSize];
+			double[] in2 = new double[inputSize];
 			Random ran = new Random();
 			for (int j = 0; j < inputSize; j++) {
 				if (ran.nextBoolean()) {
@@ -29,7 +29,7 @@ public class Main {
 		}
 
 		for (int i = 0; i < trainingSetSize; i++) {
-			int[] in2 = new int[inputSize];
+			double[] in2 = new double[inputSize];
 			Random ran = new Random();
 			for (int j = 0; j < inputSize; j++) {
 				if (ran.nextBoolean()) {

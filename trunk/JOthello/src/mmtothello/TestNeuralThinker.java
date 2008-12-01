@@ -4,16 +4,17 @@
  */
 package mmtothello;
 
+import java.util.Queue;
+
 import backprop.Backprop;
 import backprop.BoardState;
 import backprop.Player;
-import java.util.Queue;
 
 /**
  *
  * @author Ol' Dirty Bastard
  */
-public class NeuralThinker implements Thinker
+public class TestNeuralThinker implements Thinker
 {
 
 	private static final int maxDepth = 5;
@@ -21,7 +22,7 @@ public class NeuralThinker implements Thinker
 	private RowCol bestMove;
 	private final Backprop backprop;
 
-	public NeuralThinker(Backprop backprop, String name)
+	public TestNeuralThinker(Backprop backprop, String name)
 	{
 		this.backprop = backprop;
 		this.name = name;
@@ -136,25 +137,30 @@ public class NeuralThinker implements Thinker
 		return (totalScore * 100.0) / depth;
 	}
 
-	private double currentgameScore(OBoard board, char color)
-	{
-//		Score score = board.calculateScore(false);
+	//not sure if i am doing this right
+	private double currentgameScore(OBoard board, char color) {
+		// Score score = board.calculateScore(false);
 		double score;
-		try
-		{
-			score = backprop.calculateOutput(BoardState.toTranningEx(board, Player.BLACK))[0];
-			score = score - 0.5;
-			if (color == C.WHITE)
-			{
-				score = score * -1.0;
+		try {
+			if (color == C.WHITE) {
+				score = backprop.calculateOutput(BoardState.toTranningEx(board,
+						Player.WHITE, true))[0];
+			} else if (color == C.BLACK) {
+				score = backprop.calculateOutput(BoardState.toTranningEx(board,
+						Player.BLACK, true))[0];
+			} else {
+				throw new Exception(
+						"Error with the color in method currentGameScore");
 			}
+
 			return score;
-		}
-		catch (Exception ex)
-		{
+		} catch (Exception ex) {
+			System.out.println("shouldn't be here");
+			ex.printStackTrace();
 		}
 		System.out.println("shouldn't be here");
 		return 0.0;
-//		return score.getScore(color) - score.getScore(board.opponentOf(color));
+		// return score.getScore(color) -
+		// score.getScore(board.opponentOf(color));
 	}
 }
