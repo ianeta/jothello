@@ -15,7 +15,8 @@ public class OthelloTraining {
 	public static final int[] SCORERANGES = { -5, 0, 1, 6 };
 	// if you change score ranges need to change this too
 	public static final int CENTERSCORERANGE = 2;
-	public static final double LEARNINGRATE = 0.01;
+	public static final double LEARNINGRATE = 0.005;
+	public static final double MOMENTUM = 0.0005;
 
 	public static final ScoreRange RANGE = new ScoreRange(SCORERANGES);
 
@@ -53,8 +54,68 @@ public class OthelloTraining {
 
 			int scoreRangeNum = RANGE.getPlace(blackScore - whiteScore);
 
-			for (int j = i; j < game.size(); j++) {
+			for (int j = i + 1; j < game.size(); j++) {
 				partitions[move][scoreRangeNum].add(gameTrain.get(j));
+			}
+			i++;
+		}
+	}
+
+	public void addGameNew(List<OBoard> game, Player winner) throws Exception {
+
+		List<TrainingEx> gameTrainWin = new ArrayList<TrainingEx>();
+		// List<TrainingEx> gameTrainLose = new ArrayList<TrainingEx>();
+
+		Player currentMove = Player.WHITE;
+		for (OBoard oBoard : game) {
+			TrainingEx te;
+			if (currentMove == winner) {
+				te = BoardState.toTranningEx(oBoard, winner, true);
+				//System.out.println("Here1");
+			} else {
+				te = BoardState.toTranningEx(oBoard, winner, false);
+				//System.out.println("Her20000000");
+			}
+			gameTrainWin.add(te);
+			// te = BoardState.toTranningEx(oBoard, winner, false);
+			// System.out.println(te);
+			// gameTrainLose.add(te);
+			if (currentMove == Player.WHITE) {
+				currentMove = Player.BLACK;
+			} else {
+				currentMove = Player.WHITE;
+			}
+		}
+
+		int i = 0;
+		for (OBoard oBoard : game) {
+			int winnerScore;
+			int loserScore;
+
+			if (winner == Player.BLACK) {
+				winnerScore = oBoard.calculateScore(isGameOver(oBoard))
+						.getBlackScore();
+				loserScore = oBoard.calculateScore(isGameOver(oBoard))
+						.getWhiteScore();
+			} else if (winner == Player.WHITE) {
+				loserScore = oBoard.calculateScore(isGameOver(oBoard))
+						.getBlackScore();
+				winnerScore = oBoard.calculateScore(isGameOver(oBoard))
+						.getWhiteScore();
+			} else {
+				throw new Exception(
+						"Invalid player type for the winner in addGame method");
+			}
+
+			int move = this.getMovePartition(i);
+
+			int scoreRangeNum = RANGE.getPlace(winnerScore - loserScore);
+
+			//System.out.println(gameTrainWin.get(0));
+			for (int j = i + 1; j < game.size(); j++) {
+				partitions[move][scoreRangeNum].add(gameTrainWin.get(j));
+				// partitions[move][scoreRangeNum].add(gameTrainLose.get(j));
+
 			}
 			i++;
 		}
@@ -98,7 +159,7 @@ public class OthelloTraining {
 					anns[i][j].init_weights();
 					try {
 						anns[i][j].update_weights(partitions[i][j]
-								.toArray(new TrainingEx[0]));
+								.toArray(new TrainingEx[0]), MOMENTUM);
 
 					} catch (Exception e) {
 						System.out.println(e.getMessage()

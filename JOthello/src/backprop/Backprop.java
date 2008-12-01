@@ -14,7 +14,7 @@ public class Backprop implements Serializable {
 	double ln;
 	final int numOutput = 1;
 	final double threshold = 0.05;
-	final long maxTrainingTimeMillis = 60000 * 60 * 8;
+	final long maxTrainingTimeMillis = 1000 * 60 * 3;
 	double avgError;
 
 	/** Creates a new instance of Backprop */
