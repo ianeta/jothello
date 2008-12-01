@@ -63,6 +63,7 @@ public class GGSParser
 				outStream.println(s);
 			}
 			outStream.close();
+			System.out.println(parsedGames.size());
 		}
 		catch (Exception e)
 		{

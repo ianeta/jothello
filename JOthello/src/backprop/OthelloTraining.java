@@ -97,13 +97,13 @@ public class OthelloTraining {
 					anns[i][j].init_weights();
 					try {
 						anns[i][j].update_weights(partitions[i][j]
-								.toArray(new TrainingEx[1]));
+								.toArray(new TrainingEx[0]));
 
 					} catch (Exception e) {
 						System.out.println(e.getMessage()
 								+ " for the following ann: " + filename + "."
 								+ i + "." + j + ".saved");
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
 					if (i == 0 && j == CENTERSCORERANGE) {
 						defaultAnn = anns[i][j];
