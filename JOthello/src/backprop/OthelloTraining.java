@@ -30,10 +30,11 @@ public class OthelloTraining {
 		}
 	}
 
-	public void addGame(OBoard[] game, Player winner) throws Exception {
-		OBoard oBoard = null;
-		for (int i = 0; i < game.length; i++) {
-			oBoard = game[i];
+	public void addGame(List<OBoard> game, Player winner) throws Exception {
+
+		int i = 0;
+		for (OBoard oBoard : game) {
+
 			int blackScore = oBoard.calculateScore(isGameOver(oBoard))
 					.getBlackScore();
 
@@ -41,10 +42,11 @@ public class OthelloTraining {
 
 			int scoreRangeNum = RANGE.getPlace(blackScore);
 
-			for (int j = i; j < game.length; j++) {
+			for (int j = i; j < game.size(); j++) {
 				partitions[move][scoreRangeNum].add(BoardState.toTranningEx(
-						game[j], winner));
+						game.get(j), winner));
 			}
+			i++;
 		}
 	}
 
