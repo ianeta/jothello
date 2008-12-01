@@ -209,14 +209,15 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 	private void createThinkers()
 	{
-		int numThinkers = 5;
+		int numThinkers = 6;
 		thinkers = new Thinker[numThinkers + 1];
 		int k = 0;
 		thinkers[k++] = new GreedyThinker();
 		thinkers[k++] = new RandomThinker();
 		thinkers[k++] = new AnotherThinker();
 		thinkers[k++] = new SimpleAlphaBetaThinker();
-		thinkers[k++] = new NeuralThinker(this.getBasicBackProp());
+		thinkers[k++] = new NeuralThinker(this.getBasicBackProp("championship.saved"), "Champion Neural");
+		thinkers[k++] = new NeuralThinker(this.getBasicBackProp("genericgameserver.saved"), "Generic Neural");
 		thinkers[k++] = null;
 		cmbWhiteThinker.removeAllItems();
 		cmbBlackThinker.removeAllItems();
@@ -233,12 +234,12 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 		cmbBlackThinker.setSelectedIndex(numThinkers);
 	}
 	
-	private Backprop getBasicBackProp() {
+	private Backprop getBasicBackProp(String filename) {
 		Backprop def = null;
 		FileInputStream fis = null;
 		ObjectInputStream in = null;
 		try {
-			fis = new FileInputStream(C.DEFAULT_BACKPROP_FILENAME);
+			fis = new FileInputStream(filename);
 			in = new ObjectInputStream(fis);
 			def = (Backprop) in.readObject();
 			in.close();
