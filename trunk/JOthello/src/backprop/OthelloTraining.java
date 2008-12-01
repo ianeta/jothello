@@ -13,6 +13,8 @@ public class OthelloTraining {
 
 	public static final int MOVEPARTITIONSIZE = 1;
 	public static final int[] SCORERANGES = { -5, 0, 1, 6 };
+	// if you change score ranges need to change this too
+	public static final int CENTERSCORERANGE = 2;
 	public static final double LEARNINGRATE = 0.05;
 
 	public static final ScoreRange RANGE = new ScoreRange(SCORERANGES);
@@ -76,36 +78,45 @@ public class OthelloTraining {
 		// do the training
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
+		Backprop defaultAnn = null;
 		for (int i = 0; i < partitions.length; i++) {
 			for (int j = 0; j < partitions[i].length; j++) {
-				anns[i][j] = new Backprop(C.DEFAULT_DIMENSION
-						* C.DEFAULT_DIMENSION,
-						(C.DEFAULT_DIMENSION * C.DEFAULT_DIMENSION) / 2,
-						LEARNINGRATE);
-				anns[i][j].init_weights();
-				try {
-					anns[i][j].update_weights(partitions[i][j]
-							.toArray(new TrainingEx[1]));
-				} catch (Exception e) {
-					System.out.println(e.getMessage()
-							+ " for the following ann: " + filename + "." + i
-							+ "." + j + ".saved");
-					e.printStackTrace();
+
+				if (i != 0 && partitions[i][j].size() < C.MIN_GAMES_THRESHOLD) {
+					anns[i][j] = defaultAnn;
+
+				} else {
+					anns[i][j] = new Backprop(C.DEFAULT_DIMENSION
+							* C.DEFAULT_DIMENSION,
+							(C.DEFAULT_DIMENSION * C.DEFAULT_DIMENSION) / 2,
+							LEARNINGRATE);
+					anns[i][j].init_weights();
+					try {
+						anns[i][j].update_weights(partitions[i][j]
+								.toArray(new TrainingEx[1]));
+
+					} catch (Exception e) {
+						System.out.println(e.getMessage()
+								+ " for the following ann: " + filename + "."
+								+ i + "." + j + ".saved");
+						// e.printStackTrace();
+					}
+					if (i == 0 && j == CENTERSCORERANGE) {
+						defaultAnn = anns[i][j];
+						System.out.println("Default Ann is: " + filename + "."
+								+ i + "." + j + ".saved");
+					}
 				}
 
 				// save the file to disk
 				/*
-				try {
-					fos = new FileOutputStream(filename + "." + i + "." + j
-							+ ".saved");
-					out = new ObjectOutputStream(fos);
-					out.writeObject(anns[i][j]);
-					out.close();
-				} catch (IOException ex) {
-					System.out.println("Error saving to disk");
-					ex.printStackTrace();
-				}
-				*/
+				 * try { fos = new FileOutputStream(filename + "." + i + "." + j
+				 * + ".saved"); out = new ObjectOutputStream(fos);
+				 * out.writeObject(anns[i][j]); out.close(); } catch
+				 * (IOException ex) {
+				 * System.out.println("Error saving to disk");
+				 * ex.printStackTrace(); }
+				 */
 
 			}
 
