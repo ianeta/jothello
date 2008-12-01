@@ -13,7 +13,8 @@ public class Backprop implements Serializable {
 	int numHidden, numInput;
 	double ln;
 	final int numOutput = 1;
-	final double threshold = 0.05;
+	final double threshold = 0.25;
+	final long maxTrainingTimeMillis = 10000;
 
 	/** Creates a new instance of Backprop */
 	public Backprop(int in, int h, double n) {
@@ -107,11 +108,11 @@ public class Backprop implements Serializable {
 	 * }
 	 */
 
-	public void update_weights(TrainingEx[] te) {
+	public void update_weights(TrainingEx[] te) throws Exception {
 		update_weights(te, 0);
 	}
 
-	public void update_weights(TrainingEx[] te, double alpha) {
+	public void update_weights(TrainingEx[] te, double alpha) throws Exception {
 		int teSize = te.length;
 		double net, sig;
 		double avgError;
@@ -132,8 +133,11 @@ public class Backprop implements Serializable {
 		//boolean done = false;
 
 		avgError = 10;
+		long startTime = System.currentTimeMillis();
 		while (avgError > threshold) {
+			this.checkTime(startTime);
 			for (int i = 0; i < teSize; i++) {
+
 				// Calculate the output of each hidden unit
 				for (int j = 0; j < numHidden; j++) {
 					net = 0;
@@ -201,11 +205,11 @@ public class Backprop implements Serializable {
 
 	}
 
-	public void update_weights(TrainingEx[] te, TrainingEx[] vs) {
+	public void update_weights(TrainingEx[] te, TrainingEx[] vs) throws Exception {
 		update_weights(te, vs, 0);
 	}
 
-	public void update_weights(TrainingEx[] te, TrainingEx[] vs, double alpha) {
+	public void update_weights(TrainingEx[] te, TrainingEx[] vs, double alpha) throws Exception {
 		int teSize = te.length;
 		double net, sig;
 		double avgError;
@@ -226,8 +230,11 @@ public class Backprop implements Serializable {
 		//boolean done = false;
 
 		avgError = 10;
+		long startTime = System.currentTimeMillis();
 		while (avgError > threshold) {
+			this.checkTime(startTime);
 			for (int i = 0; i < teSize; i++) {
+
 				// Calculate the output of each hidden unit
 				for (int j = 0; j < numHidden; j++) {
 					net = 0;
@@ -290,7 +297,7 @@ public class Backprop implements Serializable {
 
 			// Calculate the error
 			avgError = calcError(vs);
-			 System.out.println(avgError);
+			// System.out.println(avgError);
 		}
 
 	}
@@ -343,6 +350,15 @@ public class Backprop implements Serializable {
 
 	public SigUnit[] get_out() {
 		return out;
+	}
+	
+	public void checkTime(long startTime) throws Exception {
+		long currentTime = System.currentTimeMillis();
+		
+		if(currentTime - startTime > this.maxTrainingTimeMillis) {
+			throw new Exception("Ran out of time training the ANN, will stop here, Threshold: " + this.threshold);
+		}
+		
 	}
 
 }
