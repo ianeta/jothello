@@ -32,6 +32,12 @@ public class OthelloTraining {
 
 	public void addGame(List<OBoard> game, Player winner) throws Exception {
 
+		List<TrainingEx> gameTrain = new ArrayList<TrainingEx>();
+
+		for (OBoard oBoard : game) {
+			gameTrain.add(BoardState.toTranningEx(oBoard, winner));
+		}
+
 		int i = 0;
 		for (OBoard oBoard : game) {
 
@@ -43,8 +49,7 @@ public class OthelloTraining {
 			int scoreRangeNum = RANGE.getPlace(blackScore);
 
 			for (int j = i; j < game.size(); j++) {
-				partitions[move][scoreRangeNum].add(BoardState.toTranningEx(
-						game.get(j), winner));
+				partitions[move][scoreRangeNum].add(gameTrain.get(j));
 			}
 			i++;
 		}
@@ -85,6 +90,7 @@ public class OthelloTraining {
 					System.out.println(e.getMessage()
 							+ " for the following ann: " + filename + "." + i
 							+ "." + j + ".saved");
+					e.printStackTrace();
 				}
 
 				// save the file to disk
