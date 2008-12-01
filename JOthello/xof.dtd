@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited by Fabrice DI MEGLIO (OthBase) -->
+<!-- released under the GNU LGLP License. See http://www.gnu.org/copyleft/lesser.html -->
+<!ENTITY xof-ns "http://www.othbase.net/xof">
+<!ENTITY xof-version "1.0.4">
+
+<!ELEMENT database (info?, game-collection+)>
+<!ATTLIST database
+	xmlns:xof CDATA #FIXED "&xof-ns;"
+>
+<!ELEMENT info EMPTY>
+<!ATTLIST info
+	date CDATA #REQUIRED
+	author CDATA #REQUIRED
+	version CDATA #REQUIRED
+>
+<!ELEMENT game-collection (game+)>
+<!ELEMENT event EMPTY>
+<!ATTLIST event
+	id CDATA #IMPLIED
+	name CDATA #REQUIRED
+	date CDATA #IMPLIED
+	country CDATA #IMPLIED
+	location CDATA #IMPLIED
+>
+<!ELEMENT game (event?, round?, time-control?, result, player+, moves)>
+<!ATTLIST game
+	id CDATA #IMPLIED
+>
+<!ELEMENT round EMPTY>
+<!ATTLIST round
+	id CDATA #REQUIRED
+>
+<!ELEMENT time-control (#PCDATA)>
+
+<!ELEMENT result (#PCDATA)>
+<!ATTLIST result
+	winner (black | white | draw) #IMPLIED
+	type  (normal | adjourned | black-lot | white-lot | black-resigned | white-resigned) #IMPLIED
+>
+<!ELEMENT player EMPTY>
+<!ATTLIST player
+	id CDATA #IMPLIED
+	color (black | white) #REQUIRED
+	name CDATA #REQUIRED
+	country CDATA #IMPLIED
+	rank CDATA #IMPLIED
+>
+<!ELEMENT moves (#PCDATA)>
+<!ATTLIST moves
+	game (othello-8x8 | othello-10x10) #REQUIRED
+	type (flat | tree) #REQUIRED
+>

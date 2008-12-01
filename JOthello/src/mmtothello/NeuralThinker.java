@@ -15,14 +15,15 @@ import java.util.Queue;
  */
 public class NeuralThinker implements Thinker
 {
-	private static final int maxDepth = 5;
-	private static final String name = "Neural Thinker";
+	private static final int maxDepth = 7;
+	private final String name;
 	private RowCol bestMove;
 	private final Backprop backprop;
 
-	public NeuralThinker(Backprop backprop)
+	public NeuralThinker(Backprop backprop, String name)
 	{
 		this.backprop = backprop;
+		this.name = name;
 	}
 
 	public RowCol nextMove(char color, OBoard board)
