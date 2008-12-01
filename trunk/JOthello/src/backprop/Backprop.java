@@ -14,7 +14,8 @@ public class Backprop implements Serializable {
 	double ln;
 	final int numOutput = 1;
 	final double threshold = 0.25;
-	final long maxTrainingTimeMillis = 10000;
+	final long maxTrainingTimeMillis = 10000*6;
+	double avgError;
 
 	/** Creates a new instance of Backprop */
 	public Backprop(int in, int h, double n) {
@@ -115,7 +116,7 @@ public class Backprop implements Serializable {
 	public void update_weights(TrainingEx[] te, double alpha) throws Exception {
 		int teSize = te.length;
 		double net, sig;
-		double avgError;
+//		double avgError;
 		double[] hOutput = new double[numHidden];
 		double[] oOutput = new double[numOutput];
 		double[] hError = new double[numHidden];
@@ -216,7 +217,7 @@ public class Backprop implements Serializable {
 	public void update_weights(TrainingEx[] te, TrainingEx[] vs, double alpha) throws Exception {
 		int teSize = te.length;
 		double net, sig;
-		double avgError;
+//		double avgError;
 		double[] hOutput = new double[numHidden];
 		double[] oOutput = new double[numOutput];
 		double[] hError = new double[numHidden];
@@ -364,7 +365,7 @@ public class Backprop implements Serializable {
 		long currentTime = System.currentTimeMillis();
 		
 		if(currentTime - startTime > this.maxTrainingTimeMillis) {
-			throw new Exception("Ran out of time training the ANN, will stop here, Threshold: " + this.threshold);
+			throw new Exception("Ran out of time training the ANN, will stop here, Threshold: " + this.avgError);
 		}
 		
 	}

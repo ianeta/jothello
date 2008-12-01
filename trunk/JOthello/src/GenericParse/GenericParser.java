@@ -1,5 +1,6 @@
 package GenericParse;
 
+import backprop.OthelloTraining;
 import backprop.Player;
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,9 +17,11 @@ public class GenericParser
 	private String path = "./generic/";
 	private int gameCount = 0;
 	private int drawGame = 0;
+	private OthelloTraining othelloTraining;
 
 	public GenericParser()
 	{
+		othelloTraining = new OthelloTraining();
 		fillFilenameList();
 		for (String filename : filenames)
 		{
@@ -46,13 +49,16 @@ public class GenericParser
 					if (game != null)
 					{
 						//place it in the machine learning bad boy
+						othelloTraining.addGame(game.getMoves(), game.getWinner());
 						gameCount++;
 					}
 					line = reader.readLine();
 				}
 			}
-			System.out.println(gameCount + " " + drawGame);
+//			System.out.println(gameCount + " " + drawGame);
+//			System.out.println(gameCount + drawGame);
 			reader.close();
+			othelloTraining.runTraining("outputTest");
 		}
 		catch (Exception ex)
 		{
@@ -64,6 +70,7 @@ public class GenericParser
 	{
 		List<OBoard> boards = new ArrayList<OBoard>();
 		OBoard board = new OBoard();
+		boards.add(board);
 		char color = C.BLACK;
 
 		for (int i = 0; i < moves.length(); i += 2)
@@ -76,11 +83,11 @@ public class GenericParser
 			}
 			if (board.canSet(row, col, color))
 			{
+				board = new OBoard(board);
 				board.set(row, col, color);
 				board.flipAll(row, col);
 				color = board.opponentOf(color);
 				boards.add(board);
-				board = new OBoard(board);
 			}
 			else
 			{
