@@ -93,7 +93,7 @@ public class OthelloTraining {
 				} else {
 					anns[i][j] = new Backprop(C.DEFAULT_DIMENSION
 							* C.DEFAULT_DIMENSION,
-							(C.DEFAULT_DIMENSION * C.DEFAULT_DIMENSION) / 2,
+							(C.DEFAULT_DIMENSION * C.DEFAULT_DIMENSION) / 4,
 							LEARNINGRATE);
 					anns[i][j].init_weights();
 					try {
