@@ -145,6 +145,7 @@ public class NeuralThinker implements Thinker
 		catch (Exception ex)
 		{
 		}
+		System.out.println("shouldn't be here");
 		return 0.0;
 //		return score.getScore(color) - score.getScore(board.opponentOf(color));
 	}
