@@ -11,7 +11,7 @@ import mmtothello.OBoard;
 
 public class OthelloTraining {
 
-	public static final int MOVEPARTITIONSIZE = 1;
+	public static final int MOVEPARTITIONSIZE = 10;
 	public static final int[] SCORERANGES = { -5, 0, 1, 6 };
 	// if you change score ranges need to change this too
 	public static final int CENTERSCORERANGE = 2;
@@ -20,9 +20,9 @@ public class OthelloTraining {
 	public static final ScoreRange RANGE = new ScoreRange(SCORERANGES);
 
 	public transient List<TrainingEx>[][] partitions = new List[C.TOTAL_MOVES
-			/ MOVEPARTITIONSIZE][SCORERANGES.length + 1];
+			/ MOVEPARTITIONSIZE + 1][SCORERANGES.length + 1];
 
-	public Backprop[][] anns = new Backprop[C.TOTAL_MOVES / MOVEPARTITIONSIZE][SCORERANGES.length + 1];
+	public Backprop[][] anns = new Backprop[C.TOTAL_MOVES / MOVEPARTITIONSIZE + 1][SCORERANGES.length + 1];
 
 	public OthelloTraining() {
 		for (int i = 0; i < partitions.length; i++) {
