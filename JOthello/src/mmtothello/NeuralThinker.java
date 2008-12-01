@@ -15,6 +15,7 @@ import java.util.Queue;
  */
 public class NeuralThinker implements Thinker
 {
+
 	private static final int maxDepth = 7;
 	private final String name;
 	private RowCol bestMove;
@@ -31,6 +32,7 @@ public class NeuralThinker implements Thinker
 		bestMove = new RowCol(-1, -1);
 		double v = maxValue(color, board, 0, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
 //		System.out.println(v);
+		AlphaBetaHelper.printMove(bestMove, color);
 		return bestMove;
 	}
 
@@ -51,6 +53,11 @@ public class NeuralThinker implements Thinker
 		{
 			//game is over, check who wins
 			return endgameScore(board, color, depth);
+		}
+
+		if(depth == 0)
+		{
+			AlphaBetaHelper.printValidMoves(validMoves, color);
 		}
 
 		double v = Double.NEGATIVE_INFINITY;
@@ -137,7 +144,7 @@ public class NeuralThinker implements Thinker
 		{
 			score = backprop.calculateOutput(BoardState.toTranningEx(board, Player.BLACK))[0];
 			score = score - 0.5;
-			if(color == C.WHITE)
+			if (color == C.WHITE)
 			{
 				score = score * -1.0;
 			}

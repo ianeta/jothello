@@ -374,7 +374,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 		// init board & turn
 		board.clear();
-		whiteTurn = true;
+		whiteTurn = false;
 		gameOver = false;
 		playIfItsYourTurn();
 		redrawBoard();
