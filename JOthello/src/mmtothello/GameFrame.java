@@ -190,7 +190,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 	private void createThinkers()
 	{
-		int numThinkers = 6;
+		int numThinkers = 8;
 		thinkers = new Thinker[numThinkers + 1];
 		int k = 0;
 		thinkers[k++] = new GreedyThinker();
@@ -199,7 +199,8 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 		thinkers[k++] = new SimpleAlphaBetaThinker();
 		thinkers[k++] = new NeuralThinker(this.getBasicBackProp("championship.saved"), "Champion Neural");
 		thinkers[k++] = new NeuralThinker(this.getBasicBackProp("genericgameserver.saved"), "Generic Neural");
-		//thinkers[k++] = new TestNeuralThinker(this.getBasicBackProp("testneural.saved"), "Test Neural");
+		thinkers[k++] = new TestNeuralThinker(this.getBasicBackProp("moveHistory.saved"), "Test Neural");
+		thinkers[k++] = new NeuralThinker(this.getBasicBackProp("moveHistoryOld.saved"), "Test old Neural");
 		thinkers[k++] = null;
 		cmbWhiteThinker.removeAllItems();
 		cmbBlackThinker.removeAllItems();

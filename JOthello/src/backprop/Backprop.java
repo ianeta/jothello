@@ -10,11 +10,11 @@ public class Backprop implements Serializable {
 	private static final long serialVersionUID = 1798604603698096051L;
 	SigUnit[] hidden;
 	SigUnit[] out;
-	int numHidden, numInput;
+	public int numHidden, numInput;
 	double ln;
 	final int numOutput = 1;
 	final double threshold = 0.05;
-	final long maxTrainingTimeMillis = 1000 * 60 * 60 * 3;
+	final long maxTrainingTimeMillis = 1000 * 60 * 15;
 	double avgError;
 
 	/** Creates a new instance of Backprop */

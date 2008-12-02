@@ -40,6 +40,43 @@ public class BoardState {
 		return new TrainingEx(board, (double) winner.getCode());
 	}
 
+	public static TrainingEx toTranningExMoveHistory(OBoard oBoard,
+			Player winner) throws Exception {
+
+		if (winner == Player.EMPTY) {
+			throw new Exception("Invalid player type for winner");
+		}
+
+		double board[] = new double[C.DEFAULT_DIMENSION * C.DEFAULT_DIMENSION
+				- 4];
+		char[][] b = oBoard.getMoves();
+		if (b.length != C.DEFAULT_DIMENSION
+				|| b[0].length != C.DEFAULT_DIMENSION) {
+			throw new Exception("Invalid board size");
+		}
+
+		int place = 0;
+		for (int i = 0; i < C.DEFAULT_DIMENSION; i++) {
+			for (int j = 0; j < C.DEFAULT_DIMENSION; j++) {
+				if (!((i == 3 || i == 4) && (j == 3 || j == 4))) {
+					if (b[i][j] == C.BLACK) {
+						board[place] = Player.BLACK.getCode();
+					} else if (b[i][j] == C.WHITE) {
+						board[place] = Player.WHITE.getCode();
+					} else if (b[i][j] == C.EMPTY) {
+						board[place] = Player.EMPTY.getCode();
+					} else {
+						throw new Exception(
+								"Invalid character for board location");
+					}
+					place++;
+				}
+			}
+		}
+
+		return new TrainingEx(board, (double) winner.getCode());
+	}
+
 	public static TrainingEx toTrainingExMoveHistory(OBoard oBoard,
 			Player winner, boolean winnerTurn) throws Exception {
 		if (winner == Player.EMPTY) {
