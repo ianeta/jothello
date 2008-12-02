@@ -62,6 +62,7 @@ public class OBoard
 			for (int x = 0; x < dim; x++)
 			{
 				b[y][x] = oldB[y][x];
+				history_of_moves[y][x] = board.history_of_moves[y][x];
 			}
 		}
 	}
