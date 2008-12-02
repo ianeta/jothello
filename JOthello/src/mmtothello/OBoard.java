@@ -8,9 +8,7 @@
  */
 package mmtothello;
 
-import java.util.Comparator;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Represents an Othello board. 
@@ -23,6 +21,7 @@ public class OBoard
 	{
 		dim = dimension;
 		b = new char[dim][dim];
+		history_of_moves = new char[dim][dim];
 		clear();
 	}
 
@@ -249,6 +248,7 @@ public class OBoard
 	{
 		clearJustFlipped();
 		char who = get(row, col);
+    history_of_moves[row][col] = who;
 		for (int dir = 0; dir < 8; dir++)
 		{
 			String line = getLine(row, col, dir);
@@ -344,7 +344,7 @@ public class OBoard
 		{
 			for (int j = 0; j < dim; j++)
 			{
-				b[i][j] = C.EMPTY;
+				b[i][j] = history_of_moves[i][j] = C.EMPTY;
 			}
 		}
 		clearJustFlipped();
@@ -401,10 +401,15 @@ public class OBoard
 		return new Score(countBlack, countWhite, gameOver);
 	}
 
+  public char[][] getMoves() {
+    return history_of_moves;
+  }
+  
 	private int moveNumber = 0;
 
 	/** the board */
 	private char[][] b;
+	private char[][] history_of_moves;
 	/** dimension */
 	private int dim;
 	private int numBlacks,  numWhites;
