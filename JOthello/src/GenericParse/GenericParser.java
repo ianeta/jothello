@@ -1,6 +1,7 @@
 package GenericParse;
 
 import backprop.OthelloTraining;
+import backprop.OthelloTrainingMoveHistory;
 import backprop.Player;
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,11 +18,11 @@ public class GenericParser
 	private String path = "./generic/";
 	private int gameCount = 0;
 	private int drawGame = 0;
-	private OthelloTraining othelloTraining;
+	private OthelloTrainingMoveHistory othelloTraining;
 
 	public GenericParser()
 	{
-		othelloTraining = new OthelloTraining();
+		othelloTraining = new OthelloTrainingMoveHistory();
 		fillFilenameList();
 		for (String filename : filenames)
 		{
@@ -61,7 +62,7 @@ public class GenericParser
 //			System.out.println(gameCount + " " + drawGame);
 //			System.out.println(gameCount + drawGame);
 			reader.close();
-			othelloTraining.runTraining("outputTest");
+			othelloTraining.runTraining("moveHistory");
 		}
 		catch (Exception ex)
 		{

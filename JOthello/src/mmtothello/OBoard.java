@@ -34,12 +34,14 @@ public class OBoard
 	{
 		dim = board.size();
 		b = new char[dim][dim];
+		history_of_moves = new char[dim][dim];
 		char[][] oldB = board.getB();
 		for (int y = 0; y < dim; y++)
 		{
 			for (int x = 0; x < dim; x++)
 			{
 				b[y][x] = oldB[y][x];
+				history_of_moves[y][x] = board.history_of_moves[y][x];
 			}
 		}
 		int x = move.getX();
@@ -56,6 +58,7 @@ public class OBoard
 	{
 		dim = board.size();
 		b = new char[dim][dim];
+		history_of_moves = new char[dim][dim];
 		char[][] oldB = board.getB();
 		for (int y = 0; y < dim; y++)
 		{

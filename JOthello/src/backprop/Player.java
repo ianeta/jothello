@@ -1,15 +1,15 @@
 package backprop;
 
 public enum Player {
-	WHITE(0), BLACK(1), EMPTY(2);
+	WHITE(0), BLACK(1), EMPTY(0.5);
 
-	private int code;
+	private double code;
 
-	private Player(int code) {
+	private Player(double code) {
 		this.code = code;
 	}
 
-	public int getCode() {
+	public double getCode() {
 		return code;
 	}
 
