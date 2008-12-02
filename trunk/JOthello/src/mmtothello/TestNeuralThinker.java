@@ -143,11 +143,25 @@ public class TestNeuralThinker implements Thinker
 		double score;
 		try {
 			if (color == C.WHITE) {
-				score = backprop.calculateOutput(BoardState.toTranningEx(board,
-						Player.WHITE, true))[0];
+				if (backprop.numInput == 60) {
+					score = backprop
+							.calculateOutput(BoardState
+									.toTrainingExMoveHistory(board,
+											Player.WHITE, true))[0];
+				} else {
+					score = backprop.calculateOutput(BoardState.toTranningEx(
+							board, Player.WHITE, true))[0];
+				}
 			} else if (color == C.BLACK) {
-				score = backprop.calculateOutput(BoardState.toTranningEx(board,
-						Player.BLACK, true))[0];
+				if (backprop.numInput == 60) {
+					score = backprop
+							.calculateOutput(BoardState
+									.toTrainingExMoveHistory(board,
+											Player.BLACK, true))[0];
+				} else {
+					score = backprop.calculateOutput(BoardState.toTranningEx(
+							board, Player.BLACK, true))[0];
+				}
 			} else {
 				throw new Exception(
 						"Error with the color in method currentGameScore");

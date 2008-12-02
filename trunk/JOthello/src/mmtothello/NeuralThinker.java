@@ -142,7 +142,12 @@ public class NeuralThinker implements Thinker
 		double score;
 		try
 		{
-			score = backprop.calculateOutput(BoardState.toTranningEx(board, Player.BLACK))[0];
+			if(backprop.numInput == 60) {
+				score = backprop.calculateOutput(BoardState.toTranningExMoveHistory(board, Player.BLACK))[0];
+			}
+			else {
+				score = backprop.calculateOutput(BoardState.toTranningEx(board, Player.BLACK))[0];
+			}
 			score = score - 0.5;
 			if (color == C.WHITE)
 			{

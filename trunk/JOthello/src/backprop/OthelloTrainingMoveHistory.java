@@ -34,13 +34,13 @@ public class OthelloTrainingMoveHistory {
 		}
 	}
 
-	/*
+	
 	public void addGame(List<OBoard> game, Player winner) throws Exception {
 
 		List<TrainingEx> gameTrain = new ArrayList<TrainingEx>();
 
 		for (OBoard oBoard : game) {
-			gameTrain.add(BoardState.toTranningEx(oBoard, winner));
+			gameTrain.add(BoardState.toTranningExMoveHistory(oBoard, winner));
 		}
 
 		int i = 0;
@@ -61,7 +61,7 @@ public class OthelloTrainingMoveHistory {
 			i++;
 		}
 	}
-	*/
+	
 
 	public void addGameNew(List<OBoard> game, Player winner) throws Exception {
 
