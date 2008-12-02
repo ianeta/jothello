@@ -37,11 +37,8 @@ public class GameFrame extends javax.swing.JFrame
   private void initComponents() {
 
     jLabel1 = new javax.swing.JLabel();
-    jLabel2 = new javax.swing.JLabel();
     lblNumBlack = new javax.swing.JLabel();
     lblNumWhite = new javax.swing.JLabel();
-    jSpinner1 = new javax.swing.JSpinner();
-    jLabel3 = new javax.swing.JLabel();
     jButton1 = new javax.swing.JButton();
     jLabel4 = new javax.swing.JLabel();
     jLabel5 = new javax.swing.JLabel();
@@ -49,18 +46,15 @@ public class GameFrame extends javax.swing.JFrame
     cmbWhiteThinker = new javax.swing.JComboBox();
     pnlBoard = new javax.swing.JPanel();
     lblWhoseMove = new javax.swing.JLabel();
+    jLabel6 = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-    jLabel1.setText("number of BLACKS:");
-
-    jLabel2.setText("number of WHITES:");
+    jLabel1.setText("# of pieces =");
 
     lblNumBlack.setText("0");
 
     lblNumWhite.setText("0");
-
-    jLabel3.setText("table size:");
 
     jButton1.setText("new game");
     jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -85,10 +79,12 @@ public class GameFrame extends javax.swing.JFrame
     );
     pnlBoardLayout.setVerticalGroup(
       pnlBoardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(0, 194, Short.MAX_VALUE)
+      .add(0, 259, Short.MAX_VALUE)
     );
 
     lblWhoseMove.setText("It's WHITE's move...");
+
+    jLabel6.setText("# of pieces =");
 
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -96,64 +92,51 @@ public class GameFrame extends javax.swing.JFrame
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-          .add(layout.createSequentialGroup()
-            .addContainerGap()
-            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-              .add(layout.createSequentialGroup()
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                  .add(layout.createSequentialGroup()
-                    .add(jLabel1)
-                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                    .add(lblNumBlack))
-                  .add(layout.createSequentialGroup()
-                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                    .add(jLabel2)
-                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                    .add(lblNumWhite)))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 191, Short.MAX_VALUE)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                  .add(layout.createSequentialGroup()
-                    .add(jLabel3)
-                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                    .add(jSpinner1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                  .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-              .add(layout.createSequentialGroup()
-                .add(jLabel4)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cmbBlackThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 133, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-              .add(layout.createSequentialGroup()
-                .add(jLabel5)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(cmbWhiteThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 133, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
           .add(pnlBoard, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(layout.createSequentialGroup()
             .addContainerGap()
             .add(lblWhoseMove)))
         .addContainerGap())
+      .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(layout.createSequentialGroup()
+            .add(jLabel4)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(cmbBlackThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 133, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jLabel1)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(lblNumBlack)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+            .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+          .add(layout.createSequentialGroup()
+            .add(jLabel5)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(cmbWhiteThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 133, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(jLabel6)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(lblNumWhite)))
+        .add(7, 7, 7))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
       .add(layout.createSequentialGroup()
-        .addContainerGap()
-        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(jLabel1)
-          .add(lblNumBlack)
-          .add(jSpinner1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(jLabel3))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-          .add(lblNumWhite)
-          .add(jButton1)
-          .add(jLabel2))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(20, 20, 20)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jLabel4)
-          .add(cmbBlackThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+          .add(cmbBlackThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jLabel1)
+          .add(lblNumBlack)
+          .add(jButton1))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
           .add(jLabel5)
-          .add(cmbWhiteThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        .add(6, 6, 6)
+          .add(cmbWhiteThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(jLabel6)
+          .add(lblNumWhite))
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
         .add(lblWhoseMove)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
         .add(pnlBoard, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -186,11 +169,9 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
   private javax.swing.JComboBox cmbWhiteThinker;
   private javax.swing.JButton jButton1;
   private javax.swing.JLabel jLabel1;
-  private javax.swing.JLabel jLabel2;
-  private javax.swing.JLabel jLabel3;
   private javax.swing.JLabel jLabel4;
   private javax.swing.JLabel jLabel5;
-  private javax.swing.JSpinner jSpinner1;
+  private javax.swing.JLabel jLabel6;
   private javax.swing.JLabel lblNumBlack;
   private javax.swing.JLabel lblNumWhite;
   private javax.swing.JLabel lblWhoseMove;
@@ -209,7 +190,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 	private void createThinkers()
 	{
-		int numThinkers = 7;
+		int numThinkers = 6;
 		thinkers = new Thinker[numThinkers + 1];
 		int k = 0;
 		thinkers[k++] = new GreedyThinker();
@@ -218,7 +199,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 		thinkers[k++] = new SimpleAlphaBetaThinker();
 		thinkers[k++] = new NeuralThinker(this.getBasicBackProp("championship.saved"), "Champion Neural");
 		thinkers[k++] = new NeuralThinker(this.getBasicBackProp("genericgameserver.saved"), "Generic Neural");
-		thinkers[k++] = new TestNeuralThinker(this.getBasicBackProp("testneural.saved"), "Test Neural");
+		//thinkers[k++] = new TestNeuralThinker(this.getBasicBackProp("testneural.saved"), "Test Neural");
 		thinkers[k++] = null;
 		cmbWhiteThinker.removeAllItems();
 		cmbBlackThinker.removeAllItems();
