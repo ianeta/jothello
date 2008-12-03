@@ -12,7 +12,7 @@ import java.util.Queue;
  */
 public class SimpleAlphaBetaThinker implements Thinker
 {
-	private static final int maxDepth = 5;
+	private int maxDepth = 5;
 	private static final String name = "Simple Alpha-Beta";
 	private RowCol bestMove;
 	public RowCol nextMove(char color, OBoard board)
@@ -129,4 +129,8 @@ public class SimpleAlphaBetaThinker implements Thinker
 		Score score = board.calculateScore(false);
 		return score.getScore(color) - score.getScore(board.opponentOf(color));
 	}
+
+  public void setDepth(int newDepth) {
+    maxDepth = newDepth;
+  }
 }

@@ -16,7 +16,7 @@ import java.util.Queue;
 public class NeuralThinker implements Thinker
 {
 
-	private static final int maxDepth = 5;
+	private int maxDepth = 5;
 	private final String name;
 	private RowCol bestMove;
 	private final Backprop backprop;
@@ -162,4 +162,9 @@ public class NeuralThinker implements Thinker
 		return 0.0;
 //		return score.getScore(color) - score.getScore(board.opponentOf(color));
 	}
+
+  public void setDepth(int newDepth) {
+    maxDepth = newDepth;
+  }
+
 }

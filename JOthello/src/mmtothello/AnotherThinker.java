@@ -39,5 +39,9 @@ public class AnotherThinker implements Thinker {
     int idx = random.nextInt(moves.size());
     return moves.get(idx);
   }
+  
+  public void setDepth(int newDepth) {
+//    maxDepth = newDepth;
+  }
 
 }
