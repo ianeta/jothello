@@ -48,4 +48,8 @@ public class GreedyThinker implements Thinker {
     return lot.get(idx);
   }
 
+  public void setDepth(int newDepth) {
+//    maxDepth = newDepth;
+  }
+
 }

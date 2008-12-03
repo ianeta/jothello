@@ -47,6 +47,9 @@ public class GameFrame extends javax.swing.JFrame
     pnlBoard = new javax.swing.JPanel();
     lblWhoseMove = new javax.swing.JLabel();
     jLabel6 = new javax.swing.JLabel();
+    tfHowManyGames = new javax.swing.JTextField();
+    cbAutorun = new javax.swing.JCheckBox();
+    jLabel2 = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,12 +82,28 @@ public class GameFrame extends javax.swing.JFrame
     );
     pnlBoardLayout.setVerticalGroup(
       pnlBoardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(0, 259, Short.MAX_VALUE)
+      .add(0, 258, Short.MAX_VALUE)
     );
 
     lblWhoseMove.setText("It's WHITE's move...");
 
     jLabel6.setText("# of pieces =");
+
+    tfHowManyGames.setText("10");
+    tfHowManyGames.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        tfHowManyGamesActionPerformed(evt);
+      }
+    });
+
+    cbAutorun.setText("autorun");
+    cbAutorun.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cbAutorunActionPerformed(evt);
+      }
+    });
+
+    jLabel2.setText("games");
 
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -98,9 +117,9 @@ public class GameFrame extends javax.swing.JFrame
             .add(lblWhoseMove)))
         .addContainerGap())
       .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addContainerGap(24, Short.MAX_VALUE)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-          .add(layout.createSequentialGroup()
+          .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
             .add(jLabel4)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(cmbBlackThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 133, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -108,8 +127,7 @@ public class GameFrame extends javax.swing.JFrame
             .add(jLabel1)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(lblNumBlack)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-            .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(145, 145, 145))
           .add(layout.createSequentialGroup()
             .add(jLabel5)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
@@ -118,7 +136,16 @@ public class GameFrame extends javax.swing.JFrame
             .add(jLabel6)
             .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
             .add(lblNumWhite)))
-        .add(7, 7, 7))
+        .add(11, 11, 11)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+          .add(layout.createSequentialGroup()
+            .add(cbAutorun)
+            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+            .add(tfHowManyGames, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(10, 10, 10)
+            .add(jLabel2))
+          .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+        .addContainerGap())
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -135,7 +162,10 @@ public class GameFrame extends javax.swing.JFrame
           .add(jLabel5)
           .add(cmbWhiteThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(jLabel6)
-          .add(lblNumWhite))
+          .add(lblNumWhite)
+          .add(jLabel2)
+          .add(tfHowManyGames, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+          .add(cbAutorun))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
         .add(lblWhoseMove)
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
@@ -149,6 +179,14 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 // TODO add your handling code here:
 	newGame();
 }//GEN-LAST:event_jButton1ActionPerformed
+
+private void tfHowManyGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfHowManyGamesActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_tfHowManyGamesActionPerformed
+
+private void cbAutorunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAutorunActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_cbAutorunActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -165,10 +203,12 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 		});
 	}
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JCheckBox cbAutorun;
   private javax.swing.JComboBox cmbBlackThinker;
   private javax.swing.JComboBox cmbWhiteThinker;
   private javax.swing.JButton jButton1;
   private javax.swing.JLabel jLabel1;
+  private javax.swing.JLabel jLabel2;
   private javax.swing.JLabel jLabel4;
   private javax.swing.JLabel jLabel5;
   private javax.swing.JLabel jLabel6;
@@ -176,6 +216,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
   private javax.swing.JLabel lblNumWhite;
   private javax.swing.JLabel lblWhoseMove;
   private javax.swing.JPanel pnlBoard;
+  private javax.swing.JTextField tfHowManyGames;
   // End of variables declaration//GEN-END:variables
 
 	private void initLogic()
@@ -357,9 +398,59 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 		board.clear();
 		whiteTurn = false;
 		gameOver = false;
+    
+    if (cbAutorun.isSelected()) {
+      autorun_mode = true;
+      autorun_gameIndex = 1;
+      autorun_numGames = new Integer(tfHowManyGames.getText());
+      autorun_numWinsB = autorun_numWinsW = 0;
+    } else {
+      autorun_mode = false;
+    }
+    
 		playIfItsYourTurn();
 		redrawBoard();
 	}
+  
+  private void autorun_newGameOrNot() {
+    if (!autorun_mode) return;
+
+    // print who won
+    int nB, nW;
+    nB = board.count(C.BLACK);
+    nW = board.count(C.WHITE);
+    char winner = '-'; 
+    if (nB > nW) { 
+      winner = 'B';
+      autorun_numWinsB ++;
+    } else if (nW > nB) {
+      winner = 'W';
+      autorun_numWinsW ++;
+    }
+    
+    System.out.printf("Game# %d/%d, b#= %d, w#= %d, winner=%c\n", 
+        autorun_gameIndex, autorun_numGames, 
+        nB, nW, winner);
+    
+
+    if (autorun_gameIndex >= autorun_numGames) {
+      System.out.printf("#wins for B = %d, #wins for W = %d\n", 
+          autorun_numWinsB, autorun_numWinsW);
+      return;
+    }
+    autorun_gameIndex++;
+
+    // prepare thinkers (each could be null, which means human)
+		whiteThinker = thinkers[cmbWhiteThinker.getSelectedIndex()];
+		blackThinker = thinkers[cmbBlackThinker.getSelectedIndex()];
+
+		// init board & turn
+		board.clear();
+		whiteTurn = false;
+		gameOver = false;
+		playIfItsYourTurn();
+		redrawBoard();
+  }
 
 	private Thinker currentThinker()
 	{
@@ -370,6 +461,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 	{
 		if (gameOver)
 		{
+      autorun_newGameOrNot();
 			return;
 
 		}
@@ -411,4 +503,9 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 	private boolean humanThinking = true;
 	private Thinker whiteThinker,  blackThinker;
 	private boolean gameOver = false;
+  private boolean autorun_mode = false;
+  private int autorun_numGames = 1;
+  private int autorun_gameIndex = 0;
+  private int autorun_numWinsB = 0;
+  private int autorun_numWinsW = 0;
 }

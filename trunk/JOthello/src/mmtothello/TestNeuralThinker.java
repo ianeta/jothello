@@ -17,7 +17,7 @@ import backprop.Player;
 public class TestNeuralThinker implements Thinker
 {
 
-	private static final int maxDepth = 5;
+	private int maxDepth = 5;
 	private final String name;
 	private RowCol bestMove;
 	private final Backprop backprop;
@@ -177,4 +177,8 @@ public class TestNeuralThinker implements Thinker
 		// return score.getScore(color) -
 		// score.getScore(board.opponentOf(color));
 	}
+
+  public void setDepth(int newDepth) {
+    maxDepth = newDepth;
+  }
 }

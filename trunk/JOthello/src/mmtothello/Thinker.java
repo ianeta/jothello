@@ -17,5 +17,6 @@ public interface Thinker {
   
   public RowCol nextMove(char who, OBoard board);
   public String getName();
+  public void setDepth(int newDepth); 
   
 }
