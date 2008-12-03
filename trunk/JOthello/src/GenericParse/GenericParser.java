@@ -31,6 +31,8 @@ public class GenericParser
 				parseFile(path + filename);
 			}
 		}
+		System.out.println("starting training...");
+		othelloTraining.runTraining("moveHistoryOld");
 	}
 
 	private void fillFilenameList()
@@ -59,10 +61,8 @@ public class GenericParser
 					line = reader.readLine();
 				}
 			}
-//			System.out.println(gameCount + " " + drawGame);
-//			System.out.println(gameCount + drawGame);
+			System.out.println(gameCount);
 			reader.close();
-			othelloTraining.runTraining("moveHistoryOld");
 		}
 		catch (Exception ex)
 		{

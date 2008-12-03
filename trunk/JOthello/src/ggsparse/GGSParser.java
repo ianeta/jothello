@@ -21,6 +21,7 @@ import mmtothello.Score;
  */
 public class GGSParser
 {
+
 	private int b1 = -1;
 	private int b2 = -2;
 	private State state = State.START;
@@ -36,9 +37,12 @@ public class GGSParser
 	{
 //		movesList = new ArrayList<String>();
 		fillFilenameList();
-		for(String filename : filenames)
+		for (String filename : filenames)
 		{
-			parseFile(path + filename);
+			if (filename.endsWith("ggf"))
+			{
+				parseFile(path + filename);
+			}
 		}
 //		parseFile("Othello.25e4.ggf");
 		System.out.println(gameCount);
@@ -58,7 +62,7 @@ public class GGSParser
 			fileStream.close();
 
 			PrintWriter outStream = new PrintWriter(new FileOutputStream(new File(filename + ".txt"), true));
-			for(String s : parsedGames)
+			for (String s : parsedGames)
 			{
 				outStream.println(s);
 			}
@@ -127,7 +131,6 @@ public class GGSParser
 //			}
 //		}
 //	}
-
 	private void makeMoves()
 	{
 		if ((movesBuffer.length() / 2) <= 60 && movesBuffer.length() >= 40)
@@ -229,6 +232,7 @@ public class GGSParser
 
 	private enum State
 	{
+
 		START, MOVE, MOVEVALUE1, MOVEVALUE2, END;
 	}
 

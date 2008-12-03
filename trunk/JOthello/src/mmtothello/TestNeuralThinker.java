@@ -33,7 +33,7 @@ public class TestNeuralThinker implements Thinker
 		bestMove = new RowCol(-1, -1);
 		double v = maxValue(color, board, 0, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
 //		System.out.println(v);
-		AlphaBetaHelper.printMove(bestMove, color);
+//		AlphaBetaHelper.printMove(bestMove, color);
 		return bestMove;
 	}
 
@@ -56,10 +56,10 @@ public class TestNeuralThinker implements Thinker
 			return endgameScore(board, color, depth);
 		}
 
-		if(depth == 0)
-		{
-			AlphaBetaHelper.printValidMoves(validMoves, color);
-		}
+//		if(depth == 0)
+//		{
+//			AlphaBetaHelper.printValidMoves(validMoves, color);
+//		}
 
 		double v = Double.NEGATIVE_INFINITY;
 		while (!validMoves.isEmpty())
