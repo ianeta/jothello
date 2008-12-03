@@ -236,8 +236,9 @@ private void cbAutorunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 		int k = 0;
 		thinkers[k++] = new GreedyThinker();
 		thinkers[k++] = new RandomThinker();
-		thinkers[k++] = new AnotherThinker();
+//		thinkers[k++] = new AnotherThinker();
 		thinkers[k++] = new SimpleAlphaBetaThinker();
+		thinkers[k++] = new NonDeterministicAlphaBetaThinker();
 		thinkers[k++] = new TestNeuralThinker(this.getBasicBackProp("championshipMoveHistory.saved"), "Champion Neural");
 		thinkers[k++] = new TestNeuralThinker(this.getBasicBackProp("genericMoveHistory.saved"), "Generic Neural");
 		thinkers[k++] = null;

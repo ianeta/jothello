@@ -10,10 +10,10 @@ import java.util.Queue;
  *
  * @author ODB
  */
-public class SimpleAlphaBetaThinker implements Thinker
+public class NonDeterministicAlphaBetaThinker implements Thinker
 {
 	private int maxDepth = 5;
-	private static final String name = "Deterministic Alpha-Beta";
+	private static final String name = "Non-deterministic Alpha-Beta";
 	private RowCol bestMove;
 	public RowCol nextMove(char color, OBoard board)
 	{
@@ -55,7 +55,7 @@ public class SimpleAlphaBetaThinker implements Thinker
 			double tempV = max(v, minValue(color, new OBoard(board, move), depth + 1, a, b));
 			if(depth == 0)
 			{
-				if(tempV > v)
+				if(tempV > v || (tempV == v && randomlyDoIt()) ) 
 				{
 					bestMove.row = move.getY();
 					bestMove.col = move.getX();
@@ -70,7 +70,21 @@ public class SimpleAlphaBetaThinker implements Thinker
 		}
 		return v;
 	}
+  
+  private boolean randomlyDoIt() {
+    boolean answer = random(2)==0;
+//    if (answer) {
+//      System.out.println("Random move happened!");
+//    } else {
+//      System.out.println("Random move DID NOT happen.");
+//    }
+    return answer;
+  }
 
+  private int random(int m) { 
+    return (int)( Math.random() * m );
+  }
+  
 	private double minValue(char color, OBoard board, int depth, double a, double b)
 	{
 		Queue<MoveInfo> validMoves = board.getValidMoves(board.opponentOf(color));
