@@ -18,12 +18,37 @@ public class NonDeterministicAlphaBetaThinker implements Thinker
 	public RowCol nextMove(char color, OBoard board)
 	{
 		bestMove = new RowCol(-1, -1);
+    if (isStartOfGame(board)) return getRandomMove(color, board);
+    
 		double v = maxValue(color, board, 0, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
 //		System.out.println(v);
 //		AlphaBetaHelper.printMove(bestMove, color);
 		return bestMove;
 	}
+  
+  private boolean isStartOfGame(OBoard board) {
+    int numB = board.count(C.BLACK);
+    int numW = board.count(C.WHITE);
+    int totalCount = numB + numW;
+    return totalCount <= 5; 
+  }
 
+  private RowCol getRandomMove(char color, OBoard board) {
+		Queue<MoveInfo> validMoves = board.getValidMoves(color);
+		if (validMoves.size() < 1) {
+			return bestMove;
+		}
+    int n = validMoves.size();
+    int idx = random(n);
+    MoveInfo mi = null;
+    for (int i = 0; i <= idx; i++) { 
+      mi = validMoves.remove();
+    }
+    bestMove.col = mi.getY();
+    bestMove.row = mi.getX();
+    return bestMove;
+  }
+  
 	public String getName()
 	{
 		return name;
@@ -32,6 +57,7 @@ public class NonDeterministicAlphaBetaThinker implements Thinker
 	private double maxValue(char color, OBoard board, int depth, double a, double b)
 	{
 		Queue<MoveInfo> validMoves = board.getValidMoves(color);
+    
 		if (depth >= maxDepth)
 		{
 			//game isn't over, create a heuristic for current layout
@@ -42,6 +68,7 @@ public class NonDeterministicAlphaBetaThinker implements Thinker
 			//game is over, check who wins
 			return endgameScore(board, color, depth);
 		}
+    
 
 //		if(depth == 0)
 //		{
@@ -55,7 +82,7 @@ public class NonDeterministicAlphaBetaThinker implements Thinker
 			double tempV = max(v, minValue(color, new OBoard(board, move), depth + 1, a, b));
 			if(depth == 0)
 			{
-				if(tempV > v || (tempV == v && randomlyDoIt()) ) 
+				if(tempV > v /*|| (tempV == v && randomlyDoIt()) */) 
 				{
 					bestMove.row = move.getY();
 					bestMove.col = move.getX();
@@ -82,7 +109,7 @@ public class NonDeterministicAlphaBetaThinker implements Thinker
   }
 
   private int random(int m) { 
-    return (int)( Math.random() * m );
+    return (int)( Math.random() * m ) % m;
   }
   
 	private double minValue(char color, OBoard board, int depth, double a, double b)
