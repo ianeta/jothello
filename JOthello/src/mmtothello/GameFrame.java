@@ -250,7 +250,7 @@ private void cbAutoSwapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 	private void createThinkers()
 	{
-		int numThinkers = 6;
+		int numThinkers = 7;
 		thinkers = new Thinker[numThinkers + 1];
 		int k = 0;
 		thinkers[k++] = new GreedyThinker();
@@ -258,6 +258,7 @@ private void cbAutoSwapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 //		thinkers[k++] = new AnotherThinker();
 		thinkers[k++] = new SimpleAlphaBetaThinker();
 		thinkers[k++] = new NonDeterministicAlphaBetaThinker();
+		thinkers[k++] = new RandomOnceAlphaBetaThinker();
 		thinkers[k++] = new TestNeuralThinker(this.getBasicBackProp("championshipMoveHistory.saved"), "Champion Neural");
 		thinkers[k++] = new TestNeuralThinker(this.getBasicBackProp("genericMoveHistory.saved"), "Generic Neural");
 		thinkers[k++] = null;
