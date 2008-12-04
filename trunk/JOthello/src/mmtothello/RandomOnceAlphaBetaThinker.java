@@ -10,15 +10,25 @@ import java.util.Queue;
  *
  * @author ODB
  */
-public class NonDeterministicAlphaBetaThinker implements Thinker
+public class RandomOnceAlphaBetaThinker implements Thinker
 {
 	private int maxDepth = 5;
-	private static final String name = "Non-deterministic Alpha-Beta";
+  private int currentMoveNumber = 0; 
+  private int moveNumberForRandom = 0;
+	private static final String name = "Moody Alpha-Beta";
 	private RowCol bestMove;
 	public RowCol nextMove(char color, OBoard board)
 	{
 		bestMove = new RowCol(-1, -1);
-    if (isStartOfGame(board)) return getRandomMove(color, board);
+//    if (isStartOfGame(board)) return getRandomMove(color, board);
+    if (isStartOfGame(board)) {
+      currentMoveNumber = 0;
+      moveNumberForRandom = random(30);
+    } else currentMoveNumber ++;
+    if (currentMoveNumber == moveNumberForRandom) { 
+      return getRandomMove(color, board);
+    }
+    
     
 		double v = maxValue(color, board, 0, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY);
 //		System.out.println(v);
