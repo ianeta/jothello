@@ -50,6 +50,7 @@ public class GameFrame extends javax.swing.JFrame
     tfHowManyGames = new javax.swing.JTextField();
     cbAutorun = new javax.swing.JCheckBox();
     jLabel2 = new javax.swing.JLabel();
+    cbAutoSwap = new javax.swing.JCheckBox();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,7 +83,7 @@ public class GameFrame extends javax.swing.JFrame
     );
     pnlBoardLayout.setVerticalGroup(
       pnlBoardLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(0, 258, Short.MAX_VALUE)
+      .add(0, 262, Short.MAX_VALUE)
     );
 
     lblWhoseMove.setText("It's WHITE's move...");
@@ -105,46 +106,57 @@ public class GameFrame extends javax.swing.JFrame
 
     jLabel2.setText("games");
 
+    cbAutoSwap.setLabel("auto-swap players' orders");
+    cbAutoSwap.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cbAutoSwapActionPerformed(evt);
+      }
+    });
+
     org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-      .add(layout.createSequentialGroup()
-        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-          .add(pnlBoard, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-          .add(layout.createSequentialGroup()
-            .addContainerGap()
-            .add(lblWhoseMove)))
-        .addContainerGap())
       .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-        .addContainerGap(24, Short.MAX_VALUE)
         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-          .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-            .add(jLabel4)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(cmbBlackThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 133, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jLabel1)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(lblNumBlack)
-            .add(145, 145, 145))
           .add(layout.createSequentialGroup()
-            .add(jLabel5)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(cmbWhiteThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 133, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(jLabel6)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(lblNumWhite)))
-        .add(11, 11, 11)
-        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+            .addContainerGap(24, Short.MAX_VALUE)
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .add(jLabel4)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cmbBlackThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 133, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabel1)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(lblNumBlack)
+                .add(145, 145, 145))
+              .add(layout.createSequentialGroup()
+                .add(jLabel5)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(cmbWhiteThinker, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 133, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabel6)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(lblNumWhite)))
+            .add(11, 11, 11))
           .add(layout.createSequentialGroup()
-            .add(cbAutorun)
-            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-            .add(tfHowManyGames, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-            .add(10, 10, 10)
-            .add(jLabel2))
-          .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+              .add(pnlBoard, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+              .add(layout.createSequentialGroup()
+                .addContainerGap()
+                .add(lblWhoseMove)))
+            .add(77, 77, 77)))
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+          .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+            .add(layout.createSequentialGroup()
+              .add(cbAutorun)
+              .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+              .add(tfHowManyGames, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 37, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+              .add(10, 10, 10)
+              .add(jLabel2))
+            .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 127, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+          .add(cbAutoSwap))
         .addContainerGap())
     );
     layout.setVerticalGroup(
@@ -166,8 +178,10 @@ public class GameFrame extends javax.swing.JFrame
           .add(jLabel2)
           .add(tfHowManyGames, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
           .add(cbAutorun))
-        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-        .add(lblWhoseMove)
+        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+          .add(lblWhoseMove)
+          .add(cbAutoSwap))
         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
         .add(pnlBoard, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
@@ -188,6 +202,10 @@ private void cbAutorunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 // TODO add your handling code here:
 }//GEN-LAST:event_cbAutorunActionPerformed
 
+private void cbAutoSwapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAutoSwapActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_cbAutoSwapActionPerformed
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -203,6 +221,7 @@ private void cbAutorunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 		});
 	}
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JCheckBox cbAutoSwap;
   private javax.swing.JCheckBox cbAutorun;
   private javax.swing.JComboBox cmbBlackThinker;
   private javax.swing.JComboBox cmbWhiteThinker;
@@ -418,25 +437,38 @@ private void cbAutorunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
     // print who won
     int nB, nW;
+    String blackName = (String) cmbBlackThinker.getSelectedItem();
+    String whiteName = (String) cmbWhiteThinker.getSelectedItem();
+    String winnerName = "(draw)";
     nB = board.count(C.BLACK);
     nW = board.count(C.WHITE);
     char winner = '-'; 
     if (nB > nW) { 
       winner = 'B';
+      winnerName = blackName;
       autorun_numWinsB ++;
     } else if (nW > nB) {
       winner = 'W';
+      winnerName = whiteName;
       autorun_numWinsW ++;
     }
     
-    System.out.printf("Game# %d/%d, b#= %d, w#= %d, winner=%c\n", 
+    System.out.printf("Game# %d/%d, b#= %d, w#= %d, winner=%c (%s)\n", 
         autorun_gameIndex, autorun_numGames, 
-        nB, nW, winner);
+        nB, nW, winner, winnerName);
     
 
     if (autorun_gameIndex >= autorun_numGames) {
-      System.out.printf("#wins for B = %d, #wins for W = %d\n", 
-          autorun_numWinsB, autorun_numWinsW);
+      System.out.printf("#wins for B (%s) = %d, #wins for W (%s) = %d\n", 
+          blackName, autorun_numWinsB, whiteName, autorun_numWinsW);
+      if (cbAutoSwap.isSelected()) {
+        cbAutoSwap.setSelected(false);
+        int idb = cmbBlackThinker.getSelectedIndex();
+        int idw = cmbWhiteThinker.getSelectedIndex();
+        cmbBlackThinker.setSelectedIndex(idw);
+        cmbWhiteThinker.setSelectedIndex(idb);
+        newGame();
+      }
       return;
     }
     autorun_gameIndex++;
